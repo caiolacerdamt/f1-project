@@ -21,14 +21,9 @@ def get_pilots(year, circuit):
         race.load()
         drivers = race._drivers_from_f1_api()
         drivers_df = pd.DataFrame(drivers[["Abbreviation", "FullName"]])
-        return drivers_df, race
+        laps = list(range(1, race._total_laps + 1))
+        return drivers_df, race, laps
     return pd.DataFrame(columns=["Abbreviation", "FullName"]), None
-
-@st.cache_data
-def get_numbers_of_laps(race):
-    if race:
-        return list(range(1, race._total_laps + 1))
-    return []
 
 @st.cache_data
 def get_and_process_next_race_sessions(backend='fastf1', timezone='UTC', target_timezone='America/Sao_Paulo'):
@@ -118,50 +113,70 @@ def plotting_graph3(df1, df2, option_piloto1, option_piloto2):
     fig.update_layout(title='Distância x Marcha', xaxis_title='Distância (m)', yaxis_title='Marcha', template='plotly_dark')
     return fig
 
-def display_page():
-    col1, col2 = st.columns(2)
-    anos = list(range(2018, 2025))
+st.set_page_config(layout="wide")
+col1, col2 = st.columns(2, gap="medium", vertical_alignment="center")
+anos = list(range(2018, 2025))
 
+option_ano = None
+option_circuito = None
+option_piloto1 = None
+option_piloto2 = None
+option_laps = None
+
+with col1:
+    option_ano = st.selectbox("Escolha o ano", anos, index=None)
+
+if option_ano is not None:
     with col1:
-        option_ano = st.selectbox("Escolha o ano", anos, index=None)
-
-    with col2:
-        display_next_race_sessions(col2)
-
-        fig = plot_circuit()
-        st.pyplot(fig)
-
-    if option_ano:
-        with st.spinner("Carregando"):
+        with st.spinner("Carregando Circuitos"):
             circuits = get_circuits(option_ano)
             option_circuito = st.selectbox("Circuito", circuits, index=None, placeholder="Escolha um circuito")
 
-        if option_circuito:
-            try:
-                pilotos, race = get_pilots(option_ano, option_circuito)
+if option_ano is not None and option_circuito is not None:
+    try:
+        with col1:
+            with st.spinner("Carregando Dados"):
+                pilotos, race, laps = get_pilots(option_ano, option_circuito)
                 option_piloto1 = st.selectbox("Piloto 1", pilotos["FullName"].tolist(), index=None, placeholder="Escolha um piloto")
                 option_piloto2 = st.selectbox("Piloto 2", pilotos["FullName"].tolist(), index=None, placeholder="Escolha um piloto")
+                option_laps = st.selectbox("Volta", laps, index=None, placeholder="Escolha uma volta")
+    except Exception as e:
+        st.error("Corrida não concluída ainda")
 
-                if race:
-                    laps = get_numbers_of_laps(race)
-                    option_lap = st.selectbox("Volta", laps, index=None, placeholder="Escolha a volta")
+if option_piloto1 is not None and option_piloto2 is not None and option_laps is not None:
+    with col1:
+        show_graphs = st.button("Mostrar Gráficos")
+    
+        if show_graphs:
+            abbreviation1 = pilotos.loc[pilotos["FullName"] == option_piloto1, "Abbreviation"].iloc[0]
+            abbreviation2 = pilotos.loc[pilotos["FullName"] == option_piloto2, "Abbreviation"].iloc[0]
+            df1 = race.laps.pick_driver(abbreviation1).pick_lap(option_laps).get_car_data().add_distance()
+            df2 = race.laps.pick_driver(abbreviation2).pick_lap(option_laps).get_car_data().add_distance()
 
-            except Exception as e:
-                col1.error("Corrida não concluída ainda")
+            col1.subheader(f"Gráficos de telemetria {option_piloto1} x {option_piloto2} - {option_circuito} {option_ano}")
+            col1.plotly_chart(plotting_graph1(df1, df2, option_piloto1, option_piloto2))
+            col1.plotly_chart(plotting_graph2(df1, df2, option_piloto1, option_piloto2))
+            col1.plotly_chart(plotting_graph3(df1, df2, option_piloto1, option_piloto2))
 
-            if st.button("Mostrar Gráfico"):
-                if race and option_piloto1 and option_piloto2 and option_lap:
-                    try:
-                        abbreviation1 = pilotos.loc[pilotos["FullName"] == option_piloto1, "Abbreviation"].iloc[0]
-                        abbreviation2 = pilotos.loc[pilotos["FullName"] == option_piloto2, "Abbreviation"].iloc[0]
-                        df1 = race.laps.pick_driver(abbreviation1).pick_lap(option_lap).get_car_data().add_distance()
-                        df2 = race.laps.pick_driver(abbreviation2).pick_lap(option_lap).get_car_data().add_distance()
 
-                        col1.title(f"Gráficos de telemetria {option_piloto1} x {option_piloto2} - {option_circuito} {option_ano}")
-                        col1.plotly_chart(plotting_graph1(df1, df2, option_piloto1, option_piloto2))
-                        col1.plotly_chart(plotting_graph2(df1, df2, option_piloto1, option_piloto2))
-                        col1.plotly_chart(plotting_graph3(df1, df2, option_piloto1, option_piloto2))
-                    except Exception as e:
-                        col1.error(f"Erro ao carregar telemetria: Piloto não concluiu a volta")
 
-display_page()
+        # if st.button("Mostrar Gráfico"):
+        #     if race and option_piloto1 and option_piloto2 and option_lap:
+        #         try:
+        #             abbreviation1 = pilotos.loc[pilotos["FullName"] == option_piloto1, "Abbreviation"].iloc[0]
+        #             abbreviation2 = pilotos.loc[pilotos["FullName"] == option_piloto2, "Abbreviation"].iloc[0]
+        #             df1 = race.laps.pick_driver(abbreviation1).pick_lap(option_lap).get_car_data().add_distance()
+        #             df2 = race.laps.pick_driver(abbreviation2).pick_lap(option_lap).get_car_data().add_distance()
+
+        #             col1.title(f"Gráficos de telemetria {option_piloto1} x {option_piloto2} - {option_circuito} {option_ano}")
+        #             col1.plotly_chart(plotting_graph1(df1, df2, option_piloto1, option_piloto2))
+        #             col1.plotly_chart(plotting_graph2(df1, df2, option_piloto1, option_piloto2))
+        #             col1.plotly_chart(plotting_graph3(df1, df2, option_piloto1, option_piloto2))
+        #         except Exception as e:
+        #             col1.error(f"Erro ao carregar telemetria: Piloto não concluiu a volta")
+
+with col2:
+    display_next_race_sessions(col2)
+
+    fig = plot_circuit()
+    st.pyplot(fig)
