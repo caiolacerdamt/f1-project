@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import numpy as np
 import pytz
+from PIL import Image, ImageDraw
 
 @st.cache_data
 def get_circuits(year):
@@ -48,49 +49,62 @@ def get_and_process_next_race_sessions(backend='fastf1', timezone='UTC', target_
     next_race_sessions_df = process_datetime_columns(next_race_sessions)
     return next_race_sessions_df
 
-def display_next_race_sessions(col):
+def display_next_race_sessions():
     next_race_sessions_df = get_and_process_next_race_sessions()
 
-    with col:
-        for column in next_race_sessions_df.columns:
-            if column != "EventName":
-                if pd.api.types.is_datetime64_any_dtype(next_race_sessions_df[column]):
-                    data_column = next_race_sessions_df[column]
-                    day = data_column.dt.day
-                    month = data_column.dt.month
-                    year = data_column.dt.year
-                    hour = data_column.dt.hour
-                    minute = data_column.dt.minute
+    event_name = next_race_sessions_df["EventName"].iloc[0]
+    st.write(f"""<div style='text-align: center; width: 100;'>
+                {event_name}
+             </>""", unsafe_allow_html=True)
+    for column in next_race_sessions_df.columns:
+        if column != "EventName":
+            if pd.api.types.is_datetime64_any_dtype(next_race_sessions_df[column]):
+                data_column = next_race_sessions_df[column]
+                day = data_column.dt.day
+                month = data_column.dt.month
+                year = data_column.dt.year
+                hour = data_column.dt.hour
+                minute = data_column.dt.minute
 
-                    d = day.iloc[0]
-                    m = month.iloc[0]
-                    y = year.iloc[0]
-                    h = hour.iloc[0]
-                    min = minute.iloc[0]
-                    formatted_time = f"{h:02}:{min:02}"
+                d = day.iloc[0]
+                m = month.iloc[0]
+                y = year.iloc[0]
+                h = hour.iloc[0]
+                min = minute.iloc[0]
+                formatted_time = f"{h:02}:{min:02}"
 
-                    session_name = next_race_sessions_df[column.replace('DateUtc', '')].iloc[0]
+                session_name = next_race_sessions_df[column.replace('DateUtc', '')].iloc[0]
 
-                    st.write(f"{session_name} - {d}/{m}/{y} - {formatted_time}")
+                st.write(f"""
+                <div style='text-align: center; width: 100%;'>
+                    {session_name} - {d}/{m}/{y} - {formatted_time}
+                </div>
+                """, unsafe_allow_html=True)
 
 def plot_circuit():
-    session = ff1.get_session(2021, "Austrian Grand Prix", 'Q')
+    session = ff1.get_session(2023, "Belgian Grand Prix", 'Q')
     session.load()
+
     lap = session.laps.pick_fastest()
     tel = lap.get_telemetry()
     x = np.array(tel['X'].values)
     y = np.array(tel['Y'].values)
-    
-    fig, ax = plt.subplots(figsize=(10, 2))
-    ax.plot(x, y, color='white', linewidth=2)
-    ax.axis('equal')
-    ax.set_xticks([])
-    ax.set_yticks([])
-    fig.patch.set_alpha(0)
-    ax.patch.set_alpha(0)
-    for spine in ax.spines.values():
-        spine.set_visible(False)
-    return fig
+
+    x_min, x_max = x.min(), x.max()
+    y_min, y_max = y.min(), y.max()
+    x = (x - x_min) / (x_max - x_min) * 170
+    y = (y - y_min) / (y_max - y_min) * 170
+
+    img_width, img_height = 170, 170
+    img = Image.new('RGBA', (img_width, img_height), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+
+    line_points = list(zip(y, x))
+    draw.line(line_points, fill='white', width=2)
+
+    img_rotated = img.rotate(180, expand=True)
+    img_rotated
+    return img_rotated
 
 def plotting_graph1(df1, df2, option_piloto1, option_piloto2):
     fig = go.Figure()
@@ -114,9 +128,9 @@ def plotting_graph3(df1, df2, option_piloto1, option_piloto2):
     return fig
 
 st.set_page_config(layout="wide")
-col1, col2 = st.columns(2, gap="medium", vertical_alignment="center")
-anos = list(range(2018, 2025))
+col1, col2 = st.columns(2, gap="medium")
 
+anos = list(range(2018, 2025))
 option_ano = None
 option_circuito = None
 option_piloto1 = None
@@ -158,25 +172,13 @@ if option_piloto1 is not None and option_piloto2 is not None and option_laps is 
             col1.plotly_chart(plotting_graph2(df1, df2, option_piloto1, option_piloto2))
             col1.plotly_chart(plotting_graph3(df1, df2, option_piloto1, option_piloto2))
 
-
-
-        # if st.button("Mostrar Gráfico"):
-        #     if race and option_piloto1 and option_piloto2 and option_lap:
-        #         try:
-        #             abbreviation1 = pilotos.loc[pilotos["FullName"] == option_piloto1, "Abbreviation"].iloc[0]
-        #             abbreviation2 = pilotos.loc[pilotos["FullName"] == option_piloto2, "Abbreviation"].iloc[0]
-        #             df1 = race.laps.pick_driver(abbreviation1).pick_lap(option_lap).get_car_data().add_distance()
-        #             df2 = race.laps.pick_driver(abbreviation2).pick_lap(option_lap).get_car_data().add_distance()
-
-        #             col1.title(f"Gráficos de telemetria {option_piloto1} x {option_piloto2} - {option_circuito} {option_ano}")
-        #             col1.plotly_chart(plotting_graph1(df1, df2, option_piloto1, option_piloto2))
-        #             col1.plotly_chart(plotting_graph2(df1, df2, option_piloto1, option_piloto2))
-        #             col1.plotly_chart(plotting_graph3(df1, df2, option_piloto1, option_piloto2))
-        #         except Exception as e:
-        #             col1.error(f"Erro ao carregar telemetria: Piloto não concluiu a volta")
-
 with col2:
-    display_next_race_sessions(col2)
-
-    fig = plot_circuit()
-    st.pyplot(fig)
+    next_race = 'Próxima Corrida'
+    st.markdown(f"""
+        <h3 style='text-align: center;'>{next_race}</h3>
+        """, unsafe_allow_html=True)
+    next_race_col1, next_race_col2 = st.columns(2)
+    with next_race_col1:
+        display_next_race_sessions()
+    with next_race_col2:  
+        plot_circuit()

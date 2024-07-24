@@ -1,0 +1,440 @@
+DriverNumber,TeamName,FullName,Position,ClassifiedPosition,GridPosition,Status,Points,EventName
+1,Red Bull Racing,Max Verstappen,1.0,1,1.0,Finished,25.0,Bahrain Grand Prix
+11,Red Bull Racing,Sergio Perez,2.0,2,2.0,Finished,18.0,Bahrain Grand Prix
+14,Aston Martin,Fernando Alonso,3.0,3,5.0,Finished,15.0,Bahrain Grand Prix
+55,Ferrari,Carlos Sainz,4.0,4,4.0,Finished,12.0,Bahrain Grand Prix
+44,Mercedes,Lewis Hamilton,5.0,5,7.0,Finished,10.0,Bahrain Grand Prix
+18,Aston Martin,Lance Stroll,6.0,6,8.0,Finished,8.0,Bahrain Grand Prix
+63,Mercedes,George Russell,7.0,7,6.0,Finished,6.0,Bahrain Grand Prix
+77,Alfa Romeo,Valtteri Bottas,8.0,8,12.0,Finished,4.0,Bahrain Grand Prix
+10,Alpine,Pierre Gasly,9.0,9,20.0,Finished,2.0,Bahrain Grand Prix
+23,Williams,Alexander Albon,10.0,10,15.0,Finished,1.0,Bahrain Grand Prix
+22,AlphaTauri,Yuki Tsunoda,11.0,11,14.0,Finished,0.0,Bahrain Grand Prix
+2,Williams,Logan Sargeant,12.0,12,16.0,+1 Lap,0.0,Bahrain Grand Prix
+20,Haas F1 Team,Kevin Magnussen,13.0,13,17.0,+1 Lap,0.0,Bahrain Grand Prix
+21,AlphaTauri,Nyck De Vries,14.0,14,19.0,+1 Lap,0.0,Bahrain Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,15.0,15,10.0,+1 Lap,0.0,Bahrain Grand Prix
+24,Alfa Romeo,Guanyu Zhou,16.0,16,13.0,+1 Lap,0.0,Bahrain Grand Prix
+4,McLaren,Lando Norris,17.0,17,11.0,+2 Laps,0.0,Bahrain Grand Prix
+31,Alpine,Esteban Ocon,18.0,R,9.0,Mechanical,0.0,Bahrain Grand Prix
+16,Ferrari,Charles Leclerc,19.0,R,3.0,Engine,0.0,Bahrain Grand Prix
+81,McLaren,Oscar Piastri,20.0,R,18.0,Electrical,0.0,Bahrain Grand Prix
+11,Red Bull Racing,Sergio Perez,1.0,1,1.0,Finished,25.0,Saudi Arabian Grand Prix
+1,Red Bull Racing,Max Verstappen,2.0,2,15.0,Finished,19.0,Saudi Arabian Grand Prix
+14,Aston Martin,Fernando Alonso,3.0,3,2.0,Finished,15.0,Saudi Arabian Grand Prix
+63,Mercedes,George Russell,4.0,4,3.0,Finished,12.0,Saudi Arabian Grand Prix
+44,Mercedes,Lewis Hamilton,5.0,5,7.0,Finished,10.0,Saudi Arabian Grand Prix
+55,Ferrari,Carlos Sainz,6.0,6,4.0,Finished,8.0,Saudi Arabian Grand Prix
+16,Ferrari,Charles Leclerc,7.0,7,12.0,Finished,6.0,Saudi Arabian Grand Prix
+31,Alpine,Esteban Ocon,8.0,8,6.0,Finished,4.0,Saudi Arabian Grand Prix
+10,Alpine,Pierre Gasly,9.0,9,9.0,Finished,2.0,Saudi Arabian Grand Prix
+20,Haas F1 Team,Kevin Magnussen,10.0,10,13.0,Finished,1.0,Saudi Arabian Grand Prix
+22,AlphaTauri,Yuki Tsunoda,11.0,11,16.0,Finished,0.0,Saudi Arabian Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,12.0,12,10.0,Finished,0.0,Saudi Arabian Grand Prix
+24,Alfa Romeo,Guanyu Zhou,13.0,13,11.0,Finished,0.0,Saudi Arabian Grand Prix
+21,AlphaTauri,Nyck De Vries,14.0,14,18.0,Finished,0.0,Saudi Arabian Grand Prix
+81,McLaren,Oscar Piastri,15.0,15,8.0,Finished,0.0,Saudi Arabian Grand Prix
+2,Williams,Logan Sargeant,16.0,16,20.0,Finished,0.0,Saudi Arabian Grand Prix
+4,McLaren,Lando Norris,17.0,17,19.0,Finished,0.0,Saudi Arabian Grand Prix
+77,Alfa Romeo,Valtteri Bottas,18.0,18,14.0,+1 Lap,0.0,Saudi Arabian Grand Prix
+23,Williams,Alexander Albon,19.0,R,17.0,Brakes,0.0,Saudi Arabian Grand Prix
+18,Aston Martin,Lance Stroll,20.0,R,5.0,Engine,0.0,Saudi Arabian Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,1.0,Finished,25.0,Australian Grand Prix
+44,Mercedes,Lewis Hamilton,2.0,2,3.0,Finished,18.0,Australian Grand Prix
+14,Aston Martin,Fernando Alonso,3.0,3,4.0,Finished,15.0,Australian Grand Prix
+18,Aston Martin,Lance Stroll,4.0,4,6.0,Finished,12.0,Australian Grand Prix
+11,Red Bull Racing,Sergio Perez,5.0,5,0.0,Finished,11.0,Australian Grand Prix
+4,McLaren,Lando Norris,6.0,6,13.0,Finished,8.0,Australian Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,7.0,7,10.0,Finished,6.0,Australian Grand Prix
+81,McLaren,Oscar Piastri,8.0,8,16.0,Finished,4.0,Australian Grand Prix
+24,Alfa Romeo,Guanyu Zhou,9.0,9,17.0,Finished,2.0,Australian Grand Prix
+22,AlphaTauri,Yuki Tsunoda,10.0,10,12.0,Finished,1.0,Australian Grand Prix
+77,Alfa Romeo,Valtteri Bottas,11.0,11,0.0,Finished,0.0,Australian Grand Prix
+55,Ferrari,Carlos Sainz,12.0,12,5.0,Finished,0.0,Australian Grand Prix
+10,Alpine,Pierre Gasly,13.0,13,9.0,Collision,0.0,Australian Grand Prix
+31,Alpine,Esteban Ocon,14.0,14,11.0,Collision,0.0,Australian Grand Prix
+21,AlphaTauri,Nyck De Vries,15.0,15,15.0,Collision,0.0,Australian Grand Prix
+2,Williams,Logan Sargeant,16.0,16,18.0,Collision,0.0,Australian Grand Prix
+20,Haas F1 Team,Kevin Magnussen,17.0,17,14.0,Accident,0.0,Australian Grand Prix
+63,Mercedes,George Russell,18.0,R,2.0,Engine,0.0,Australian Grand Prix
+23,Williams,Alexander Albon,19.0,R,8.0,Accident,0.0,Australian Grand Prix
+16,Ferrari,Charles Leclerc,20.0,R,7.0,Collision,0.0,Australian Grand Prix
+16,Ferrari,Charles Leclerc,,,,,,Azerbaijan Grand Prix
+1,Red Bull Racing,Max Verstappen,,,,,,Azerbaijan Grand Prix
+11,Red Bull Racing,Sergio Perez,,,,,,Azerbaijan Grand Prix
+55,Ferrari,Carlos Sainz,,,,,,Azerbaijan Grand Prix
+44,Mercedes,Lewis Hamilton,,,,,,Azerbaijan Grand Prix
+14,Aston Martin,Fernando Alonso,,,,,,Azerbaijan Grand Prix
+4,McLaren,Lando Norris,,,,,,Azerbaijan Grand Prix
+22,AlphaTauri,Yuki Tsunoda,,,,,,Azerbaijan Grand Prix
+18,Aston Martin,Lance Stroll,,,,,,Azerbaijan Grand Prix
+81,McLaren,Oscar Piastri,,,,,,Azerbaijan Grand Prix
+63,Mercedes,George Russell,,,,,,Azerbaijan Grand Prix
+23,Williams,Alexander Albon,,,,,,Azerbaijan Grand Prix
+77,Alfa Romeo,Valtteri Bottas,,,,,,Azerbaijan Grand Prix
+2,Williams,Logan Sargeant,,,,,,Azerbaijan Grand Prix
+24,Alfa Romeo,Guanyu Zhou,,,,,,Azerbaijan Grand Prix
+20,Haas F1 Team,Kevin Magnussen,,,,,,Azerbaijan Grand Prix
+10,Alpine,Pierre Gasly,,,,,,Azerbaijan Grand Prix
+21,AlphaTauri,Nyck De Vries,,,,,,Azerbaijan Grand Prix
+31,Alpine,Esteban Ocon,,,,,,Azerbaijan Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,,,,,,Azerbaijan Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,9.0,Finished,26.0,Miami Grand Prix
+11,Red Bull Racing,Sergio Perez,2.0,2,1.0,Finished,18.0,Miami Grand Prix
+14,Aston Martin,Fernando Alonso,3.0,3,2.0,Finished,15.0,Miami Grand Prix
+63,Mercedes,George Russell,4.0,4,6.0,Finished,12.0,Miami Grand Prix
+55,Ferrari,Carlos Sainz,5.0,5,3.0,Finished,10.0,Miami Grand Prix
+44,Mercedes,Lewis Hamilton,6.0,6,13.0,Finished,8.0,Miami Grand Prix
+16,Ferrari,Charles Leclerc,7.0,7,7.0,Finished,6.0,Miami Grand Prix
+10,Alpine,Pierre Gasly,8.0,8,5.0,Finished,4.0,Miami Grand Prix
+31,Alpine,Esteban Ocon,9.0,9,8.0,Finished,2.0,Miami Grand Prix
+20,Haas F1 Team,Kevin Magnussen,10.0,10,4.0,Finished,1.0,Miami Grand Prix
+22,AlphaTauri,Yuki Tsunoda,11.0,11,17.0,Finished,0.0,Miami Grand Prix
+18,Aston Martin,Lance Stroll,12.0,12,18.0,Finished,0.0,Miami Grand Prix
+77,Alfa Romeo,Valtteri Bottas,13.0,13,10.0,Finished,0.0,Miami Grand Prix
+23,Williams,Alexander Albon,14.0,14,11.0,Finished,0.0,Miami Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,15.0,15,12.0,Finished,0.0,Miami Grand Prix
+24,Alfa Romeo,Guanyu Zhou,16.0,16,14.0,Finished,0.0,Miami Grand Prix
+4,McLaren,Lando Norris,17.0,17,16.0,Finished,0.0,Miami Grand Prix
+21,AlphaTauri,Nyck De Vries,18.0,18,15.0,Finished,0.0,Miami Grand Prix
+81,McLaren,Oscar Piastri,19.0,19,19.0,+1 Lap,0.0,Miami Grand Prix
+2,Williams,Logan Sargeant,20.0,20,20.0,+1 Lap,0.0,Miami Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,1.0,Finished,25.0,Monaco Grand Prix
+14,Aston Martin,Fernando Alonso,2.0,2,2.0,Finished,18.0,Monaco Grand Prix
+31,Alpine,Esteban Ocon,3.0,3,3.0,Finished,15.0,Monaco Grand Prix
+44,Mercedes,Lewis Hamilton,4.0,4,5.0,Finished,13.0,Monaco Grand Prix
+63,Mercedes,George Russell,5.0,5,8.0,Finished,10.0,Monaco Grand Prix
+16,Ferrari,Charles Leclerc,6.0,6,6.0,Finished,8.0,Monaco Grand Prix
+10,Alpine,Pierre Gasly,7.0,7,7.0,Finished,6.0,Monaco Grand Prix
+55,Ferrari,Carlos Sainz,8.0,8,4.0,Finished,4.0,Monaco Grand Prix
+4,McLaren,Lando Norris,9.0,9,10.0,+1 Lap,2.0,Monaco Grand Prix
+81,McLaren,Oscar Piastri,10.0,10,11.0,+1 Lap,1.0,Monaco Grand Prix
+77,Alfa Romeo,Valtteri Bottas,11.0,11,15.0,+1 Lap,0.0,Monaco Grand Prix
+21,AlphaTauri,Nyck De Vries,12.0,12,12.0,+1 Lap,0.0,Monaco Grand Prix
+24,Alfa Romeo,Guanyu Zhou,13.0,13,19.0,+1 Lap,0.0,Monaco Grand Prix
+23,Williams,Alexander Albon,14.0,14,13.0,+1 Lap,0.0,Monaco Grand Prix
+22,AlphaTauri,Yuki Tsunoda,15.0,15,9.0,+2 Laps,0.0,Monaco Grand Prix
+11,Red Bull Racing,Sergio Perez,16.0,16,20.0,+2 Laps,0.0,Monaco Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,17.0,17,18.0,+2 Laps,0.0,Monaco Grand Prix
+2,Williams,Logan Sargeant,18.0,18,16.0,+2 Laps,0.0,Monaco Grand Prix
+20,Haas F1 Team,Kevin Magnussen,19.0,R,17.0,Collision damage,0.0,Monaco Grand Prix
+18,Aston Martin,Lance Stroll,20.0,R,14.0,Accident,0.0,Monaco Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,1.0,Finished,26.0,Spanish Grand Prix
+44,Mercedes,Lewis Hamilton,2.0,2,4.0,Finished,18.0,Spanish Grand Prix
+63,Mercedes,George Russell,3.0,3,12.0,Finished,15.0,Spanish Grand Prix
+11,Red Bull Racing,Sergio Perez,4.0,4,11.0,Finished,12.0,Spanish Grand Prix
+55,Ferrari,Carlos Sainz,5.0,5,2.0,Finished,10.0,Spanish Grand Prix
+18,Aston Martin,Lance Stroll,6.0,6,5.0,Finished,8.0,Spanish Grand Prix
+14,Aston Martin,Fernando Alonso,7.0,7,8.0,Finished,6.0,Spanish Grand Prix
+31,Alpine,Esteban Ocon,8.0,8,6.0,Finished,4.0,Spanish Grand Prix
+24,Alfa Romeo,Guanyu Zhou,9.0,9,13.0,Finished,2.0,Spanish Grand Prix
+10,Alpine,Pierre Gasly,10.0,10,10.0,Finished,1.0,Spanish Grand Prix
+16,Ferrari,Charles Leclerc,11.0,11,19.0,Finished,0.0,Spanish Grand Prix
+22,AlphaTauri,Yuki Tsunoda,12.0,12,15.0,Finished,0.0,Spanish Grand Prix
+81,McLaren,Oscar Piastri,13.0,13,9.0,+1 Lap,0.0,Spanish Grand Prix
+21,AlphaTauri,Nyck De Vries,14.0,14,14.0,+1 Lap,0.0,Spanish Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,15.0,15,7.0,+1 Lap,0.0,Spanish Grand Prix
+23,Williams,Alexander Albon,16.0,16,18.0,+1 Lap,0.0,Spanish Grand Prix
+4,McLaren,Lando Norris,17.0,17,3.0,+1 Lap,0.0,Spanish Grand Prix
+20,Haas F1 Team,Kevin Magnussen,18.0,18,17.0,+1 Lap,0.0,Spanish Grand Prix
+77,Alfa Romeo,Valtteri Bottas,19.0,19,16.0,+1 Lap,0.0,Spanish Grand Prix
+2,Williams,Logan Sargeant,20.0,20,20.0,+1 Lap,0.0,Spanish Grand Prix
+1,Red Bull Racing,Max Verstappen,,,,,,Canadian Grand Prix
+14,Aston Martin,Fernando Alonso,,,,,,Canadian Grand Prix
+44,Mercedes,Lewis Hamilton,,,,,,Canadian Grand Prix
+63,Mercedes,George Russell,,,,,,Canadian Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,,,,,,Canadian Grand Prix
+31,Alpine,Esteban Ocon,,,,,,Canadian Grand Prix
+4,McLaren,Lando Norris,,,,,,Canadian Grand Prix
+81,McLaren,Oscar Piastri,,,,,,Canadian Grand Prix
+23,Williams,Alexander Albon,,,,,,Canadian Grand Prix
+16,Ferrari,Charles Leclerc,,,,,,Canadian Grand Prix
+55,Ferrari,Carlos Sainz,,,,,,Canadian Grand Prix
+11,Red Bull Racing,Sergio Perez,,,,,,Canadian Grand Prix
+20,Haas F1 Team,Kevin Magnussen,,,,,,Canadian Grand Prix
+77,Alfa Romeo,Valtteri Bottas,,,,,,Canadian Grand Prix
+10,Alpine,Pierre Gasly,,,,,,Canadian Grand Prix
+18,Aston Martin,Lance Stroll,,,,,,Canadian Grand Prix
+21,AlphaTauri,Nyck De Vries,,,,,,Canadian Grand Prix
+2,Williams,Logan Sargeant,,,,,,Canadian Grand Prix
+22,AlphaTauri,Yuki Tsunoda,,,,,,Canadian Grand Prix
+24,Alfa Romeo,Guanyu Zhou,,,,,,Canadian Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,1.0,Finished,26.0,Austrian Grand Prix
+16,Ferrari,Charles Leclerc,2.0,2,2.0,Finished,18.0,Austrian Grand Prix
+11,Red Bull Racing,Sergio Perez,3.0,3,15.0,Finished,15.0,Austrian Grand Prix
+4,McLaren,Lando Norris,4.0,4,4.0,Finished,12.0,Austrian Grand Prix
+14,Aston Martin,Fernando Alonso,5.0,5,7.0,Finished,10.0,Austrian Grand Prix
+55,Ferrari,Carlos Sainz,6.0,6,3.0,Finished,8.0,Austrian Grand Prix
+63,Mercedes,George Russell,7.0,7,11.0,Finished,6.0,Austrian Grand Prix
+44,Mercedes,Lewis Hamilton,8.0,8,5.0,Finished,4.0,Austrian Grand Prix
+18,Aston Martin,Lance Stroll,9.0,9,6.0,Finished,2.0,Austrian Grand Prix
+10,Alpine,Pierre Gasly,10.0,10,9.0,Finished,1.0,Austrian Grand Prix
+23,Williams,Alexander Albon,11.0,11,10.0,Finished,0.0,Austrian Grand Prix
+24,Alfa Romeo,Guanyu Zhou,12.0,12,17.0,+1 Lap,0.0,Austrian Grand Prix
+2,Williams,Logan Sargeant,13.0,13,18.0,+1 Lap,0.0,Austrian Grand Prix
+31,Alpine,Esteban Ocon,14.0,14,12.0,+1 Lap,0.0,Austrian Grand Prix
+77,Alfa Romeo,Valtteri Bottas,15.0,15,14.0,+1 Lap,0.0,Austrian Grand Prix
+81,McLaren,Oscar Piastri,16.0,16,13.0,+1 Lap,0.0,Austrian Grand Prix
+21,AlphaTauri,Nyck De Vries,17.0,17,0.0,+1 Lap,0.0,Austrian Grand Prix
+20,Haas F1 Team,Kevin Magnussen,18.0,18,0.0,+1 Lap,0.0,Austrian Grand Prix
+22,AlphaTauri,Yuki Tsunoda,19.0,19,16.0,+1 Lap,0.0,Austrian Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,20.0,R,8.0,Power loss,0.0,Austrian Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,1.0,Finished,26.0,British Grand Prix
+4,McLaren,Lando Norris,2.0,2,2.0,Finished,18.0,British Grand Prix
+44,Mercedes,Lewis Hamilton,3.0,3,7.0,Finished,15.0,British Grand Prix
+81,McLaren,Oscar Piastri,4.0,4,3.0,Finished,12.0,British Grand Prix
+63,Mercedes,George Russell,5.0,5,6.0,Finished,10.0,British Grand Prix
+11,Red Bull Racing,Sergio Perez,6.0,6,15.0,Finished,8.0,British Grand Prix
+14,Aston Martin,Fernando Alonso,7.0,7,9.0,Finished,6.0,British Grand Prix
+23,Williams,Alexander Albon,8.0,8,8.0,Finished,4.0,British Grand Prix
+16,Ferrari,Charles Leclerc,9.0,9,4.0,Finished,2.0,British Grand Prix
+55,Ferrari,Carlos Sainz,10.0,10,5.0,Finished,1.0,British Grand Prix
+2,Williams,Logan Sargeant,11.0,11,14.0,Finished,0.0,British Grand Prix
+77,Alfa Romeo,Valtteri Bottas,12.0,12,20.0,Finished,0.0,British Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,13.0,13,11.0,Finished,0.0,British Grand Prix
+18,Aston Martin,Lance Stroll,14.0,14,12.0,Finished,0.0,British Grand Prix
+24,Alfa Romeo,Guanyu Zhou,15.0,15,17.0,Finished,0.0,British Grand Prix
+22,AlphaTauri,Yuki Tsunoda,16.0,16,16.0,Finished,0.0,British Grand Prix
+21,AlphaTauri,Nyck De Vries,17.0,17,18.0,Finished,0.0,British Grand Prix
+10,Alpine,Pierre Gasly,18.0,18,10.0,Collision damage,0.0,British Grand Prix
+20,Haas F1 Team,Kevin Magnussen,19.0,R,19.0,Engine,0.0,British Grand Prix
+31,Alpine,Esteban Ocon,20.0,R,13.0,Oil leak,0.0,British Grand Prix
+44,Mercedes,Lewis Hamilton,,,,,,Hungarian Grand Prix
+1,Red Bull Racing,Max Verstappen,,,,,,Hungarian Grand Prix
+4,McLaren,Lando Norris,,,,,,Hungarian Grand Prix
+81,McLaren,Oscar Piastri,,,,,,Hungarian Grand Prix
+24,Alfa Romeo,Guanyu Zhou,,,,,,Hungarian Grand Prix
+16,Ferrari,Charles Leclerc,,,,,,Hungarian Grand Prix
+77,Alfa Romeo,Valtteri Bottas,,,,,,Hungarian Grand Prix
+14,Aston Martin,Fernando Alonso,,,,,,Hungarian Grand Prix
+11,Red Bull Racing,Sergio Perez,,,,,,Hungarian Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,,,,,,Hungarian Grand Prix
+55,Ferrari,Carlos Sainz,,,,,,Hungarian Grand Prix
+31,Alpine,Esteban Ocon,,,,,,Hungarian Grand Prix
+3,AlphaTauri,Daniel Ricciardo,,,,,,Hungarian Grand Prix
+18,Aston Martin,Lance Stroll,,,,,,Hungarian Grand Prix
+10,Alpine,Pierre Gasly,,,,,,Hungarian Grand Prix
+23,Williams,Alexander Albon,,,,,,Hungarian Grand Prix
+22,AlphaTauri,Yuki Tsunoda,,,,,,Hungarian Grand Prix
+63,Mercedes,George Russell,,,,,,Hungarian Grand Prix
+20,Haas F1 Team,Kevin Magnussen,,,,,,Hungarian Grand Prix
+2,Williams,Logan Sargeant,,,,,,Hungarian Grand Prix
+16,Ferrari,Charles Leclerc,,,,,,Belgian Grand Prix
+11,Red Bull Racing,Sergio Perez,,,,,,Belgian Grand Prix
+44,Mercedes,Lewis Hamilton,,,,,,Belgian Grand Prix
+55,Ferrari,Carlos Sainz,,,,,,Belgian Grand Prix
+81,McLaren,Oscar Piastri,,,,,,Belgian Grand Prix
+1,Red Bull Racing,Max Verstappen,,,,,,Belgian Grand Prix
+4,McLaren,Lando Norris,,,,,,Belgian Grand Prix
+63,Mercedes,George Russell,,,,,,Belgian Grand Prix
+14,Aston Martin,Fernando Alonso,,,,,,Belgian Grand Prix
+18,Aston Martin,Lance Stroll,,,,,,Belgian Grand Prix
+22,AlphaTauri,Yuki Tsunoda,,,,,,Belgian Grand Prix
+10,Alpine,Pierre Gasly,,,,,,Belgian Grand Prix
+77,Alfa Romeo,Valtteri Bottas,,,,,,Belgian Grand Prix
+31,Alpine,Esteban Ocon,,,,,,Belgian Grand Prix
+23,Williams,Alexander Albon,,,,,,Belgian Grand Prix
+20,Haas F1 Team,Kevin Magnussen,,,,,,Belgian Grand Prix
+24,Alfa Romeo,Guanyu Zhou,,,,,,Belgian Grand Prix
+2,Williams,Logan Sargeant,,,,,,Belgian Grand Prix
+3,AlphaTauri,Daniel Ricciardo,,,,,,Belgian Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,,,,,,Belgian Grand Prix
+1,Red Bull Racing,Max Verstappen,,,,,,Dutch Grand Prix
+4,McLaren,Lando Norris,,,,,,Dutch Grand Prix
+63,Mercedes,George Russell,,,,,,Dutch Grand Prix
+23,Williams,Alexander Albon,,,,,,Dutch Grand Prix
+14,Aston Martin,Fernando Alonso,,,,,,Dutch Grand Prix
+55,Ferrari,Carlos Sainz,,,,,,Dutch Grand Prix
+11,Red Bull Racing,Sergio Perez,,,,,,Dutch Grand Prix
+81,McLaren,Oscar Piastri,,,,,,Dutch Grand Prix
+16,Ferrari,Charles Leclerc,,,,,,Dutch Grand Prix
+2,Williams,Logan Sargeant,,,,,,Dutch Grand Prix
+18,Aston Martin,Lance Stroll,,,,,,Dutch Grand Prix
+10,Alpine,Pierre Gasly,,,,,,Dutch Grand Prix
+44,Mercedes,Lewis Hamilton,,,,,,Dutch Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,,,,,,Dutch Grand Prix
+24,Alfa Romeo,Guanyu Zhou,,,,,,Dutch Grand Prix
+31,Alpine,Esteban Ocon,,,,,,Dutch Grand Prix
+22,AlphaTauri,Yuki Tsunoda,,,,,,Dutch Grand Prix
+77,Alfa Romeo,Valtteri Bottas,,,,,,Dutch Grand Prix
+40,AlphaTauri,Liam Lawson,,,,,,Dutch Grand Prix
+20,Haas F1 Team,Kevin Magnussen,,,,,,Dutch Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,2.0,Finished,25.0,Italian Grand Prix
+11,Red Bull Racing,Sergio Perez,2.0,2,5.0,Finished,18.0,Italian Grand Prix
+55,Ferrari,Carlos Sainz,3.0,3,1.0,Finished,15.0,Italian Grand Prix
+16,Ferrari,Charles Leclerc,4.0,4,3.0,Finished,12.0,Italian Grand Prix
+63,Mercedes,George Russell,5.0,5,4.0,Finished,10.0,Italian Grand Prix
+44,Mercedes,Lewis Hamilton,6.0,6,8.0,Finished,8.0,Italian Grand Prix
+23,Williams,Alexander Albon,7.0,7,6.0,Finished,6.0,Italian Grand Prix
+4,McLaren,Lando Norris,8.0,8,9.0,Finished,4.0,Italian Grand Prix
+14,Aston Martin,Fernando Alonso,9.0,9,10.0,Finished,2.0,Italian Grand Prix
+77,Alfa Romeo,Valtteri Bottas,10.0,10,14.0,Finished,1.0,Italian Grand Prix
+40,AlphaTauri,Liam Lawson,11.0,11,12.0,Finished,0.0,Italian Grand Prix
+81,McLaren,Oscar Piastri,12.0,12,7.0,Finished,0.0,Italian Grand Prix
+2,Williams,Logan Sargeant,13.0,13,15.0,Finished,0.0,Italian Grand Prix
+24,Alfa Romeo,Guanyu Zhou,14.0,14,16.0,Finished,0.0,Italian Grand Prix
+10,Alpine,Pierre Gasly,15.0,15,17.0,Finished,0.0,Italian Grand Prix
+18,Aston Martin,Lance Stroll,16.0,16,20.0,Finished,0.0,Italian Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,17.0,17,13.0,+1 Lap,0.0,Italian Grand Prix
+20,Haas F1 Team,Kevin Magnussen,18.0,18,19.0,+1 Lap,0.0,Italian Grand Prix
+31,Alpine,Esteban Ocon,19.0,R,18.0,Steering,0.0,Italian Grand Prix
+22,AlphaTauri,Yuki Tsunoda,20.0,R,11.0,Engine,0.0,Italian Grand Prix
+55,Ferrari,Carlos Sainz,,,,,,Singapore Grand Prix
+63,Mercedes,George Russell,,,,,,Singapore Grand Prix
+16,Ferrari,Charles Leclerc,,,,,,Singapore Grand Prix
+4,McLaren,Lando Norris,,,,,,Singapore Grand Prix
+44,Mercedes,Lewis Hamilton,,,,,,Singapore Grand Prix
+20,Haas F1 Team,Kevin Magnussen,,,,,,Singapore Grand Prix
+14,Aston Martin,Fernando Alonso,,,,,,Singapore Grand Prix
+31,Alpine,Esteban Ocon,,,,,,Singapore Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,,,,,,Singapore Grand Prix
+40,AlphaTauri,Liam Lawson,,,,,,Singapore Grand Prix
+1,Red Bull Racing,Max Verstappen,,,,,,Singapore Grand Prix
+10,Alpine,Pierre Gasly,,,,,,Singapore Grand Prix
+11,Red Bull Racing,Sergio Perez,,,,,,Singapore Grand Prix
+23,Williams,Alexander Albon,,,,,,Singapore Grand Prix
+22,AlphaTauri,Yuki Tsunoda,,,,,,Singapore Grand Prix
+77,Alfa Romeo,Valtteri Bottas,,,,,,Singapore Grand Prix
+81,McLaren,Oscar Piastri,,,,,,Singapore Grand Prix
+2,Williams,Logan Sargeant,,,,,,Singapore Grand Prix
+24,Alfa Romeo,Guanyu Zhou,,,,,,Singapore Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,1.0,Finished,26.0,Japanese Grand Prix
+4,McLaren,Lando Norris,2.0,2,3.0,Finished,18.0,Japanese Grand Prix
+81,McLaren,Oscar Piastri,3.0,3,2.0,Finished,15.0,Japanese Grand Prix
+16,Ferrari,Charles Leclerc,4.0,4,4.0,Finished,12.0,Japanese Grand Prix
+44,Mercedes,Lewis Hamilton,5.0,5,7.0,Finished,10.0,Japanese Grand Prix
+55,Ferrari,Carlos Sainz,6.0,6,6.0,Finished,8.0,Japanese Grand Prix
+63,Mercedes,George Russell,7.0,7,8.0,Finished,6.0,Japanese Grand Prix
+14,Aston Martin,Fernando Alonso,8.0,8,10.0,Finished,4.0,Japanese Grand Prix
+31,Alpine,Esteban Ocon,9.0,9,14.0,Finished,2.0,Japanese Grand Prix
+10,Alpine,Pierre Gasly,10.0,10,12.0,Finished,1.0,Japanese Grand Prix
+40,AlphaTauri,Liam Lawson,11.0,11,11.0,+1 Lap,0.0,Japanese Grand Prix
+22,AlphaTauri,Yuki Tsunoda,12.0,12,9.0,+1 Lap,0.0,Japanese Grand Prix
+24,Alfa Romeo,Guanyu Zhou,13.0,13,19.0,+1 Lap,0.0,Japanese Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,14.0,14,18.0,+1 Lap,0.0,Japanese Grand Prix
+20,Haas F1 Team,Kevin Magnussen,15.0,15,15.0,+1 Lap,0.0,Japanese Grand Prix
+23,Williams,Alexander Albon,16.0,R,13.0,Collision damage,0.0,Japanese Grand Prix
+2,Williams,Logan Sargeant,17.0,R,0.0,Collision damage,0.0,Japanese Grand Prix
+18,Aston Martin,Lance Stroll,18.0,R,17.0,Rear wing,0.0,Japanese Grand Prix
+11,Red Bull Racing,Sergio Perez,19.0,R,5.0,Collision damage,0.0,Japanese Grand Prix
+77,Alfa Romeo,Valtteri Bottas,20.0,R,16.0,Collision damage,0.0,Japanese Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,1.0,Finished,26.0,Qatar Grand Prix
+81,McLaren,Oscar Piastri,2.0,2,6.0,Finished,18.0,Qatar Grand Prix
+4,McLaren,Lando Norris,3.0,3,10.0,Finished,15.0,Qatar Grand Prix
+63,Mercedes,George Russell,4.0,4,2.0,Finished,12.0,Qatar Grand Prix
+16,Ferrari,Charles Leclerc,5.0,5,5.0,Finished,10.0,Qatar Grand Prix
+14,Aston Martin,Fernando Alonso,6.0,6,4.0,Finished,8.0,Qatar Grand Prix
+31,Alpine,Esteban Ocon,7.0,7,8.0,Finished,6.0,Qatar Grand Prix
+77,Alfa Romeo,Valtteri Bottas,8.0,8,9.0,Finished,4.0,Qatar Grand Prix
+24,Alfa Romeo,Guanyu Zhou,9.0,9,19.0,Finished,2.0,Qatar Grand Prix
+11,Red Bull Racing,Sergio Perez,10.0,10,0.0,Finished,1.0,Qatar Grand Prix
+18,Aston Martin,Lance Stroll,11.0,11,16.0,Finished,0.0,Qatar Grand Prix
+10,Alpine,Pierre Gasly,12.0,12,7.0,Finished,0.0,Qatar Grand Prix
+23,Williams,Alexander Albon,13.0,13,13.0,Finished,0.0,Qatar Grand Prix
+20,Haas F1 Team,Kevin Magnussen,14.0,14,18.0,+1 Lap,0.0,Qatar Grand Prix
+22,AlphaTauri,Yuki Tsunoda,15.0,15,11.0,+1 Lap,0.0,Qatar Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,16.0,16,14.0,+1 Lap,0.0,Qatar Grand Prix
+40,AlphaTauri,Liam Lawson,17.0,17,17.0,+1 Lap,0.0,Qatar Grand Prix
+2,Williams,Logan Sargeant,18.0,R,15.0,Illness,0.0,Qatar Grand Prix
+44,Mercedes,Lewis Hamilton,19.0,R,3.0,Collision,0.0,Qatar Grand Prix
+55,Ferrari,Carlos Sainz,20.0,W,12.0,Fuel leak,0.0,Qatar Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,6.0,Finished,25.0,United States Grand Prix
+4,McLaren,Lando Norris,2.0,2,2.0,Finished,18.0,United States Grand Prix
+55,Ferrari,Carlos Sainz,3.0,3,4.0,Finished,15.0,United States Grand Prix
+11,Red Bull Racing,Sergio Perez,4.0,4,9.0,Finished,12.0,United States Grand Prix
+63,Mercedes,George Russell,5.0,5,5.0,Finished,10.0,United States Grand Prix
+10,Alpine,Pierre Gasly,6.0,6,7.0,Finished,8.0,United States Grand Prix
+18,Aston Martin,Lance Stroll,7.0,7,0.0,Finished,6.0,United States Grand Prix
+22,AlphaTauri,Yuki Tsunoda,8.0,8,11.0,Finished,5.0,United States Grand Prix
+23,Williams,Alexander Albon,9.0,9,15.0,Finished,2.0,United States Grand Prix
+2,Williams,Logan Sargeant,10.0,10,16.0,Finished,1.0,United States Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,11.0,11,0.0,Finished,0.0,United States Grand Prix
+77,Alfa Romeo,Valtteri Bottas,12.0,12,13.0,Finished,0.0,United States Grand Prix
+24,Alfa Romeo,Guanyu Zhou,13.0,13,12.0,+1 Lap,0.0,United States Grand Prix
+20,Haas F1 Team,Kevin Magnussen,14.0,14,0.0,+1 Lap,0.0,United States Grand Prix
+3,AlphaTauri,Daniel Ricciardo,15.0,15,14.0,+1 Lap,0.0,United States Grand Prix
+14,Aston Martin,Fernando Alonso,16.0,R,0.0,Undertray,0.0,United States Grand Prix
+81,McLaren,Oscar Piastri,17.0,R,10.0,Radiator,0.0,United States Grand Prix
+31,Alpine,Esteban Ocon,18.0,R,8.0,Collision damage,0.0,United States Grand Prix
+44,Mercedes,Lewis Hamilton,19.0,D,3.0,Disqualified,0.0,United States Grand Prix
+16,Ferrari,Charles Leclerc,20.0,D,1.0,Disqualified,0.0,United States Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,3.0,Finished,25.0,Mexico City Grand Prix
+44,Mercedes,Lewis Hamilton,2.0,2,6.0,Finished,19.0,Mexico City Grand Prix
+16,Ferrari,Charles Leclerc,3.0,3,1.0,Finished,15.0,Mexico City Grand Prix
+55,Ferrari,Carlos Sainz,4.0,4,2.0,Finished,12.0,Mexico City Grand Prix
+4,McLaren,Lando Norris,5.0,5,17.0,Finished,10.0,Mexico City Grand Prix
+63,Mercedes,George Russell,6.0,6,8.0,Finished,8.0,Mexico City Grand Prix
+3,AlphaTauri,Daniel Ricciardo,7.0,7,4.0,Finished,6.0,Mexico City Grand Prix
+81,McLaren,Oscar Piastri,8.0,8,7.0,Finished,4.0,Mexico City Grand Prix
+23,Williams,Alexander Albon,9.0,9,14.0,Finished,2.0,Mexico City Grand Prix
+31,Alpine,Esteban Ocon,10.0,10,15.0,Finished,1.0,Mexico City Grand Prix
+10,Alpine,Pierre Gasly,11.0,11,11.0,Finished,0.0,Mexico City Grand Prix
+22,AlphaTauri,Yuki Tsunoda,12.0,12,18.0,Finished,0.0,Mexico City Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,13.0,13,12.0,Finished,0.0,Mexico City Grand Prix
+24,Alfa Romeo,Guanyu Zhou,14.0,14,10.0,Finished,0.0,Mexico City Grand Prix
+77,Alfa Romeo,Valtteri Bottas,15.0,15,9.0,Finished,0.0,Mexico City Grand Prix
+2,Williams,Logan Sargeant,16.0,16,19.0,Retired,0.0,Mexico City Grand Prix
+18,Aston Martin,Lance Stroll,17.0,17,0.0,Collision damage,0.0,Mexico City Grand Prix
+14,Aston Martin,Fernando Alonso,18.0,R,13.0,Withdrew,0.0,Mexico City Grand Prix
+20,Haas F1 Team,Kevin Magnussen,19.0,R,16.0,Accident,0.0,Mexico City Grand Prix
+11,Red Bull Racing,Sergio Perez,20.0,R,5.0,Collision damage,0.0,Mexico City Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,1.0,Finished,25.0,São Paulo Grand Prix
+4,McLaren,Lando Norris,2.0,2,6.0,Finished,19.0,São Paulo Grand Prix
+14,Aston Martin,Fernando Alonso,3.0,3,4.0,Finished,15.0,São Paulo Grand Prix
+11,Red Bull Racing,Sergio Perez,4.0,4,9.0,Finished,12.0,São Paulo Grand Prix
+18,Aston Martin,Lance Stroll,5.0,5,3.0,Finished,10.0,São Paulo Grand Prix
+55,Ferrari,Carlos Sainz,6.0,6,7.0,Finished,8.0,São Paulo Grand Prix
+10,Alpine,Pierre Gasly,7.0,7,15.0,Finished,6.0,São Paulo Grand Prix
+44,Mercedes,Lewis Hamilton,8.0,8,5.0,Finished,4.0,São Paulo Grand Prix
+22,AlphaTauri,Yuki Tsunoda,9.0,9,16.0,Finished,2.0,São Paulo Grand Prix
+31,Alpine,Esteban Ocon,10.0,10,14.0,+1 Lap,1.0,São Paulo Grand Prix
+2,Williams,Logan Sargeant,11.0,11,19.0,+1 Lap,0.0,São Paulo Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,12.0,12,11.0,+1 Lap,0.0,São Paulo Grand Prix
+3,AlphaTauri,Daniel Ricciardo,13.0,13,17.0,+1 Lap,0.0,São Paulo Grand Prix
+81,McLaren,Oscar Piastri,14.0,14,10.0,+2 Laps,0.0,São Paulo Grand Prix
+63,Mercedes,George Russell,15.0,R,8.0,Overheating,0.0,São Paulo Grand Prix
+77,Alfa Romeo,Valtteri Bottas,16.0,R,18.0,Engine,0.0,São Paulo Grand Prix
+24,Alfa Romeo,Guanyu Zhou,17.0,R,20.0,Engine,0.0,São Paulo Grand Prix
+20,Haas F1 Team,Kevin Magnussen,18.0,R,12.0,Collision,0.0,São Paulo Grand Prix
+23,Williams,Alexander Albon,19.0,R,13.0,Collision,0.0,São Paulo Grand Prix
+16,Ferrari,Charles Leclerc,20.0,W,0.0,Engine,0.0,São Paulo Grand Prix
+1,Red Bull Racing,Max Verstappen,1.0,1,2.0,Finished,25.0,Las Vegas Grand Prix
+16,Ferrari,Charles Leclerc,2.0,2,1.0,Finished,18.0,Las Vegas Grand Prix
+11,Red Bull Racing,Sergio Perez,3.0,3,11.0,Finished,15.0,Las Vegas Grand Prix
+31,Alpine,Esteban Ocon,4.0,4,16.0,Finished,12.0,Las Vegas Grand Prix
+18,Aston Martin,Lance Stroll,5.0,5,19.0,Finished,10.0,Las Vegas Grand Prix
+55,Ferrari,Carlos Sainz,6.0,6,12.0,Finished,8.0,Las Vegas Grand Prix
+44,Mercedes,Lewis Hamilton,7.0,7,10.0,Finished,6.0,Las Vegas Grand Prix
+63,Mercedes,George Russell,8.0,8,3.0,Finished,4.0,Las Vegas Grand Prix
+14,Aston Martin,Fernando Alonso,9.0,9,9.0,Finished,2.0,Las Vegas Grand Prix
+81,McLaren,Oscar Piastri,10.0,10,18.0,Finished,2.0,Las Vegas Grand Prix
+10,Alpine,Pierre Gasly,11.0,11,4.0,Finished,0.0,Las Vegas Grand Prix
+23,Williams,Alexander Albon,12.0,12,5.0,Finished,0.0,Las Vegas Grand Prix
+20,Haas F1 Team,Kevin Magnussen,13.0,13,8.0,Finished,0.0,Las Vegas Grand Prix
+3,AlphaTauri,Daniel Ricciardo,14.0,14,14.0,Finished,0.0,Las Vegas Grand Prix
+24,Alfa Romeo,Guanyu Zhou,15.0,15,17.0,Finished,0.0,Las Vegas Grand Prix
+2,Williams,Logan Sargeant,16.0,16,6.0,Finished,0.0,Las Vegas Grand Prix
+77,Alfa Romeo,Valtteri Bottas,17.0,17,7.0,Finished,0.0,Las Vegas Grand Prix
+22,AlphaTauri,Yuki Tsunoda,18.0,18,20.0,Gearbox,0.0,Las Vegas Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,19.0,19,13.0,Engine,0.0,Las Vegas Grand Prix
+4,McLaren,Lando Norris,20.0,R,15.0,Accident,0.0,Las Vegas Grand Prix
+1,Red Bull Racing,Max Verstappen,,,,,,Abu Dhabi Grand Prix
+16,Ferrari,Charles Leclerc,,,,,,Abu Dhabi Grand Prix
+81,McLaren,Oscar Piastri,,,,,,Abu Dhabi Grand Prix
+63,Mercedes,George Russell,,,,,,Abu Dhabi Grand Prix
+4,McLaren,Lando Norris,,,,,,Abu Dhabi Grand Prix
+22,AlphaTauri,Yuki Tsunoda,,,,,,Abu Dhabi Grand Prix
+14,Aston Martin,Fernando Alonso,,,,,,Abu Dhabi Grand Prix
+27,Haas F1 Team,Nico Hulkenberg,,,,,,Abu Dhabi Grand Prix
+11,Red Bull Racing,Sergio Perez,,,,,,Abu Dhabi Grand Prix
+10,Alpine,Pierre Gasly,,,,,,Abu Dhabi Grand Prix
+44,Mercedes,Lewis Hamilton,,,,,,Abu Dhabi Grand Prix
+31,Alpine,Esteban Ocon,,,,,,Abu Dhabi Grand Prix
+18,Aston Martin,Lance Stroll,,,,,,Abu Dhabi Grand Prix
+23,Williams,Alexander Albon,,,,,,Abu Dhabi Grand Prix
+3,AlphaTauri,Daniel Ricciardo,,,,,,Abu Dhabi Grand Prix
+55,Ferrari,Carlos Sainz,,,,,,Abu Dhabi Grand Prix
+20,Haas F1 Team,Kevin Magnussen,,,,,,Abu Dhabi Grand Prix
+77,Alfa Romeo,Valtteri Bottas,,,,,,Abu Dhabi Grand Prix
+24,Alfa Romeo,Guanyu Zhou,,,,,,Abu Dhabi Grand Prix
+2,Williams,Logan Sargeant,,,,,,Abu Dhabi Grand Prix
