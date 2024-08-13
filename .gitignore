@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 /.env
 race_results_laps_2024.csv
+df_model.csv
+df_test.csv
