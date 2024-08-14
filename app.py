@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pytz
 from PIL import Image, ImageDraw
+import tensorflow as tf
+import subprocess
 
 @st.cache_data
 def get_circuits(year):
@@ -27,12 +29,28 @@ def get_pilots(year, circuit):
     return pd.DataFrame(columns=["Abbreviation", "FullName"]), None
 
 @st.cache_data
+def load_predictions():
+    #subprocess.run(['python', 'script_model.py'], check=True)
+    model = tf.keras.models.load_model('model/model.keras')
+    df_to_predict = pd.read_csv("current_df_to_predict.csv")
+    df_encoder_combination = pd.read_csv("df_model.csv")
+    df_encoder_combination = df_encoder_combination[["FullName", "NameEncoder"]].drop_duplicates().sort_values(by="NameEncoder")
+    predicition = model.predict(df_to_predict)
+    np.set_printoptions(suppress=True)
+    probabilities = np.round(predicition * 100, 2)
+    df_encoder_combination["Probabilities"] = probabilities
+    df_encoder_combination = df_encoder_combination.sort_values(by="Probabilities", ascending=False)
+    top3 = df_encoder_combination[["FullName", "Probabilities"]].iloc[:3]
+
+    return top3["FullName"].tolist(), top3["Probabilities"].tolist()
+
+@st.cache_data
 def get_and_process_next_race_sessions(backend='fastf1', timezone='UTC', target_timezone='America/Sao_Paulo'):
     race = ff1.get_events_remaining(backend=backend)
-    next_race_sessions = race[["EventName", "Session1", "Session1DateUtc", "Session2", "Session2DateUtc", "Session3", "Session3DateUtc", "Session4", "Session4DateUtc", "Session5", "Session5DateUtc"]].iloc[0]
+    next_race_sessions = race[["Country","EventName", "Session1", "Session1DateUtc", "Session2", "Session2DateUtc", "Session3", "Session3DateUtc", "Session4", "Session4DateUtc", "Session5", "Session5DateUtc"]].iloc[0]
     next_race_sessions = pd.DataFrame([next_race_sessions])
     
-    columns_to_exclude = ["EventName", "Session1", "Session2", "Session3", "Session4", "Session5"]
+    columns_to_exclude = ["Country","EventName", "Session1", "Session2", "Session3", "Session4", "Session5"]
     brt = pytz.timezone(target_timezone)
 
     def process_datetime_columns(df, timezone='UTC'):
@@ -53,8 +71,9 @@ def display_next_race_sessions():
     next_race_sessions_df = get_and_process_next_race_sessions()
 
     event_name = next_race_sessions_df["EventName"].iloc[0]
-    st.write(f"""<div style='text-align: center; width: 100;'>
-                {event_name}
+    country_name = next_race_sessions_df["Country"].iloc[0]
+    st.write(f"""<div style='text-align: center; width: 100; font-size:20px;'>
+                {event_name} - {country_name}
              </>""", unsafe_allow_html=True)
     for column in next_race_sessions_df.columns:
         if column != "EventName":
@@ -76,13 +95,14 @@ def display_next_race_sessions():
                 session_name = next_race_sessions_df[column.replace('DateUtc', '')].iloc[0]
 
                 st.write(f"""
-                <div style='text-align: center; width: 100%;'>
+                <div style='text-align: center; width: 100%; font-size:20px;'>
                     {session_name} - {d}/{m}/{y} - {formatted_time}
                 </div>
                 """, unsafe_allow_html=True)
 
 def plot_circuit():
-    session = ff1.get_session(2023, "Belgian Grand Prix", 'Q')
+    next_race = ff1.get_events_remaining().iloc[0].EventName
+    session = ff1.get_session(2023, next_race, 'Q')
     session.load()
 
     lap = session.laps.pick_fastest()
@@ -95,14 +115,14 @@ def plot_circuit():
     x = (x - x_min) / (x_max - x_min) * 170
     y = (y - y_min) / (y_max - y_min) * 170
 
-    img_width, img_height = 170, 170
+    img_width, img_height = 200, 200
     img = Image.new('RGBA', (img_width, img_height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
     line_points = list(zip(y, x))
     draw.line(line_points, fill='white', width=2)
 
-    img_rotated = img.rotate(180, expand=True)
+    img_rotated = img.rotate(200, expand=True)
     img_rotated
     return img_rotated
 
@@ -172,13 +192,33 @@ if option_piloto1 is not None and option_piloto2 is not None and option_laps is 
             col1.plotly_chart(plotting_graph2(df1, df2, option_piloto1, option_piloto2))
             col1.plotly_chart(plotting_graph3(df1, df2, option_piloto1, option_piloto2))
 
+st.markdown(
+    """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+    div {
+        font-family: 'Roboto', sans-serif;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 with col2:
-    next_race = 'Próxima Corrida'
+    next_race = 'Next Race Info'
     st.markdown(f"""
-        <h3 style='text-align: center;'>{next_race}</h3>
+        <div style='text-align:center; font-size:24px; font-weight:bold;'>{next_race}</div>
         """, unsafe_allow_html=True)
     next_race_col1, next_race_col2 = st.columns(2)
     with next_race_col1:
         display_next_race_sessions()
-    with next_race_col2:  
+    with next_race_col2:
         plot_circuit()
+    names, probs = load_predictions()
+    st.write("Top 3 Probabilities to Winner")
+    for name, prob in zip(names, probs):
+        st.write(f"{name} - {prob:.2f}%")
+     
