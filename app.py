@@ -30,7 +30,7 @@ def get_pilots(year, circuit):
 
 @st.cache_data
 def load_predictions():
-    #subprocess.run(['python', 'script_model.py'], check=True)
+#     #subprocess.run(['python', 'script_model.py'], check=True)
     model = tf.keras.models.load_model('model/model.keras')
     df_to_predict = pd.read_csv("current_df_to_predict.csv")
     df_encoder_combination = pd.read_csv("df_model.csv")

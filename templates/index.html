@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>F1 Analysis Dashboard</h1>
+
+<form method="POST" action="/results">
+    <label for="year">Escola o ano:</label>
+    <select name="year" id="year">
+        {% for year in anos %}
+        <option value="{{ year }}">{{ year }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+{% endblock %}
