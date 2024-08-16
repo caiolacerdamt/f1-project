@@ -2,24 +2,23 @@ import streamlit as st
 import fastf1 as ff1
 import pandas as pd
 import plotly.graph_objects as go
+from datetime import datetime as dt
 
 @st.cache_data
-def get_circuits(year):
-        if year:
-            schedule = ff1.get_event_schedule(year)["EventName"].unique()
-            return list(schedule)
-        return []
+def get_circuits(): 
+        events_schedule = ff1.get_event_schedule(dt.now().year)
+        today = pd.Timestamp.now()
+        finished_events = events_schedule[events_schedule["EventDate"] <= today]
+        return list(finished_events["EventName"][1:])
     
 @st.cache_data(show_spinner=False)
-def get_pilots(year, circuit):
-    if year and circuit:
-        race = ff1.get_session(year, circuit, "R")
-        race.load()
-        drivers = race._drivers_from_f1_api()
-        drivers_df = pd.DataFrame(drivers[["Abbreviation", "FullName"]])
-        laps = list(range(1, race._total_laps + 1))
-        return drivers_df, race, laps
-    return pd.DataFrame(columns=["Abbreviation", "FullName"]), None
+def get_circuit_data(circuit):
+    race = ff1.get_session(dt.now().year, circuit, "R")
+    race.load(weather=False, messages=False)
+    drivers = race._drivers_from_f1_api()
+    drivers_df = pd.DataFrame(drivers[["Abbreviation", "FullName"]])
+    laps = list(range(1, race._total_laps + 1))
+    return drivers_df, laps, race
 
 def speed_graph(df1, df2, option_driver1, option_driver2):
     fig = go.Figure()

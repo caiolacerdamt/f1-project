@@ -5,13 +5,15 @@ import numpy as np
 import pytz
 from PIL import Image, ImageDraw
 import tensorflow as tf
+import requests as rq
+from bs4 import BeautifulSoup as bs
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def load_predictions():
     #subprocess.run(['python', 'script_model.py'], check=True)
-    model = tf.keras.models.load_model('../../model/model.keras')
-    df_to_predict = pd.read_csv("../../data/current_df_to_predict.csv")
-    df_encoder_combination = pd.read_csv("../../data/df_model.csv")
+    model = tf.keras.models.load_model('model/model.keras')
+    df_to_predict = pd.read_csv("data/current_df_to_predict.csv")
+    df_encoder_combination = pd.read_csv("data/df_model.csv")
     df_encoder_combination = df_encoder_combination[["FullName", "NameEncoder"]].drop_duplicates().sort_values(by="NameEncoder")
     predicition = model.predict(df_to_predict)
     np.set_printoptions(suppress=True)
@@ -50,9 +52,11 @@ def display_next_race_sessions():
 
     event_name = next_race_sessions_df["EventName"].iloc[0]
     country_name = next_race_sessions_df["Country"].iloc[0]
-    st.write(f"""<div style='text-align: center; width: 100; font-size:20px;'>
-                {event_name} - {country_name}
-             </>""", unsafe_allow_html=True)
+    st.markdown(f"""
+                <h3 style="text-align:center;">
+                    {event_name} - {country_name}
+                </h3>
+                """, unsafe_allow_html=True)
     for column in next_race_sessions_df.columns:
         if column != "EventName":
             if pd.api.types.is_datetime64_any_dtype(next_race_sessions_df[column]):
@@ -72,12 +76,11 @@ def display_next_race_sessions():
 
                 session_name = next_race_sessions_df[column.replace('DateUtc', '')].iloc[0]
 
-                st.write(f"""
-                <div style='text-align: center; width: 100%; font-size:20px;'>
-                    {session_name} - {d}/{m}/{y} - {formatted_time}
-                </div>
-                """, unsafe_allow_html=True)
+                st.markdown(f"""
+                                <p style="text-align: center;">{session_name} - {d}/{m}/{y} - {formatted_time}</p>
+                            """, unsafe_allow_html=True)
 
+@st.cache_data(show_spinner=False)
 def plot_circuit():
     next_race = ff1.get_events_remaining().iloc[0].EventName
     session = ff1.get_session(2023, next_race, 'Q')
@@ -93,13 +96,37 @@ def plot_circuit():
     x = (x - x_min) / (x_max - x_min) * 170
     y = (y - y_min) / (y_max - y_min) * 170
 
-    img_width, img_height = 200, 200
+    img_width, img_height = 170, 170
     img = Image.new('RGBA', (img_width, img_height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
     line_points = list(zip(y, x))
     draw.line(line_points, fill='white', width=2)
 
-    img = img.rotate(200, expand=True)
-    img
-    return img
+    img_rotated = img.rotate(200, expand=True)
+    return img_rotated
+
+@st.cache_data(show_spinner=False)
+def get_driver_standings():
+    url = "https://www.formula1.com/en/results/2024/drivers"
+    response = rq.get(url).text
+    soup = bs(response, 'html.parser')
+    table = soup.find('table', class_='f1-table-with-data')
+
+    headers = []
+    rows = []
+
+    for th in table.find_all('th'):
+        headers.append(th.text.strip())
+
+        
+    for tr in table.find_all('tr'):
+        cells = tr.find_all('td')
+        if len(cells) > 0:
+            row = [cell.text.strip() for cell in cells]
+            rows.append(row)
+
+    df = pd.DataFrame(rows, columns=headers)
+    df["Driver"] = df['Driver'].apply(lambda x: x[:-3])
+
+    return df
