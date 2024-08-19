@@ -52,11 +52,8 @@ def display_next_race_sessions():
 
     event_name = next_race_sessions_df["EventName"].iloc[0]
     country_name = next_race_sessions_df["Country"].iloc[0]
-    st.markdown(f"""
-                <h3 style="text-align:center;">
-                    {event_name} - {country_name}
-                </h3>
-                """, unsafe_allow_html=True)
+    sessions = []
+
     for column in next_race_sessions_df.columns:
         if column != "EventName":
             if pd.api.types.is_datetime64_any_dtype(next_race_sessions_df[column]):
@@ -75,10 +72,15 @@ def display_next_race_sessions():
                 formatted_time = f"{h:02}:{min:02}"
 
                 session_name = next_race_sessions_df[column.replace('DateUtc', '')].iloc[0]
+                session_info = f"{session_name} - {d}/{m}/{y} - {formatted_time}"
 
-                st.markdown(f"""
-                                <p style="text-align: center;">{session_name} - {d}/{m}/{y} - {formatted_time}</p>
-                            """, unsafe_allow_html=True)
+                sessions.append(session_info)
+    return event_name, country_name, sessions  
+
+def rotate(xy, *, angle):
+    rot_mat = np.array([[np.cos(angle), np.sin(angle)],
+                        [-np.sin(angle), np.cos(angle)]])
+    return np.matmul(xy, rot_mat)
 
 @st.cache_data(show_spinner=False)
 def plot_circuit():
@@ -87,24 +89,33 @@ def plot_circuit():
     session.load()
 
     lap = session.laps.pick_fastest()
-    tel = lap.get_telemetry()
-    x = np.array(tel['X'].values)
-    y = np.array(tel['Y'].values)
+    pos = lap.get_pos_data()
 
+    circuit_info = session.get_circuit_info()
+
+    track = pos.loc[:, ('X', 'Y')].to_numpy()
+
+    track_angle = circuit_info.rotation / 180 * np.pi
+
+    rotated_track = rotate(track, angle=track_angle)
+
+    x = rotated_track[:, 0]
+    y = rotated_track[:, 1]
     x_min, x_max = x.min(), x.max()
     y_min, y_max = y.min(), y.max()
     x = (x - x_min) / (x_max - x_min) * 170
     y = (y - y_min) / (y_max - y_min) * 170
 
+    y = 170 - y
+
     img_width, img_height = 170, 170
     img = Image.new('RGBA', (img_width, img_height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
-    line_points = list(zip(y, x))
+    line_points = list(zip(x, y))
     draw.line(line_points, fill='white', width=2)
 
-    img_rotated = img.rotate(200, expand=True)
-    return img_rotated
+    return img
 
 @st.cache_data(show_spinner=False)
 def get_driver_standings():
