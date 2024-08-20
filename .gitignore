@@ -7,3 +7,4 @@ race_results_laps_2024.csv
 df_model.csv
 current_df_to_predict.csv
 current_df_to_train.csv
+.gitgnore
