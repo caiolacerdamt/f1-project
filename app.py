@@ -59,13 +59,8 @@ if menu == "Season Info":
                     Season - {year}
                 </h1>
                 """, unsafe_allow_html=True)
-    container1, container2 = st.columns([1,1.5])
-    with container1:
-        st.markdown(f"""
-                    <h3 style="text-align: center;">Drivers Standings</h3>
-                    """, unsafe_allow_html=True)
-        driver_standings = Season.get_driver_standings()
-        html_standing = driver_standings.style \
+    next_race_info = Season.create_event_dataframe()
+    html_standing2 = next_race_info.style \
             .set_properties(**{
                 'border': 'none',
                 'padding': '6px 12px',
@@ -73,36 +68,28 @@ if menu == "Season Info":
             .set_table_styles({
                 'table': [{
                     'selector': 'table',
-                    'props': 'width: 80%; margin: 0 auto;'
+                    'props': 'width: 100%; margin: 0 auto;'
                 }]
             }) \
             .hide(axis='index').to_html()
-        st.markdown(html_standing, unsafe_allow_html=True)
-    with container2:
-        col1, col2 = st.columns([1, 1])
-        with col1:
-            event_name, country_name, sessions_infos = Season.display_next_race_sessions()
-            st.markdown(f"""
-                        <h3>{event_name} - {country_name}</h3>
-                        """, unsafe_allow_html=True)
-
-            for session in sessions_infos:
-                    st.markdown(f"""
-                        <p style="text-align: center;">{session}</p>
+    st.markdown(html_standing2, unsafe_allow_html=True)
+    st.markdown(f"""
+                    <h3 style="text-align: center;">Drivers Standings</h3>
                     """, unsafe_allow_html=True)
-
-        with col2:
-            names, probs = Season.load_predictions()
-            st.markdown(f"""
-                <h3 style="text-align: center;">Chance to win</h3>
-            """, unsafe_allow_html=True)
-            for name, prob in zip(names, probs):
-                st.markdown(f"""
-                    <p style="text-align:center;">{name} - {prob:.2f}%</p>
-                """, unsafe_allow_html=True)
-
-        circuit_image = Season.plot_circuit()
-        st.image(circuit_image)
+    driver_standings = Season.get_driver_standings()
+    html_standing = driver_standings.style \
+            .set_properties(**{
+                'border': 'none',
+                'padding': '6px 12px',
+            }) \
+            .set_table_styles({
+                'table': [{
+                    'selector': 'table',
+                    'props': 'width: 100%; margin: 0 auto;'
+                }]
+            }) \
+            .hide(axis='index').to_html()
+    st.markdown(html_standing, unsafe_allow_html=True)
 
 
      

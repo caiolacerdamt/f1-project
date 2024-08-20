@@ -1,12 +1,15 @@
 import streamlit as st
-import fastf1 as ff1
 import pandas as pd
 import numpy as np
-import pytz
-from PIL import Image, ImageDraw
 import tensorflow as tf
 import requests as rq
 from bs4 import BeautifulSoup as bs
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from fastf1 import get_events_remaining
+import time
 
 @st.cache_data(show_spinner=False)
 def load_predictions():
@@ -24,98 +27,59 @@ def load_predictions():
 
     return top3["FullName"].tolist(), top3["Probabilities"].tolist()
 
-@st.cache_data
-def get_and_process_next_race_sessions(backend='fastf1', timezone='UTC', target_timezone='America/Sao_Paulo'):
-    race = ff1.get_events_remaining(backend=backend)
-    next_race_sessions = race[["Country","EventName", "Session1", "Session1DateUtc", "Session2", "Session2DateUtc", "Session3", "Session3DateUtc", "Session4", "Session4DateUtc", "Session5", "Session5DateUtc"]].iloc[0]
-    next_race_sessions = pd.DataFrame([next_race_sessions])
-    
-    columns_to_exclude = ["Country","EventName", "Session1", "Session2", "Session3", "Session4", "Session5"]
-    brt = pytz.timezone(target_timezone)
+def initialize_chrome_driver():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    return driver
 
-    def process_datetime_columns(df, timezone='UTC'):
-        df_processed = df.copy()
-        for column in df_processed.columns:
-            if column not in columns_to_exclude:
-                df_processed[column] = pd.to_datetime(df_processed[column], errors='coerce')
-                df_processed[column] = df_processed[column].fillna(df[column])
-                if df_processed[column].dt.tz is None:
-                    df_processed[column] = df_processed[column].dt.tz_localize(timezone)
-                df_processed[column] = df_processed[column].dt.tz_convert(brt)
-        return df_processed
+def get_next_race_content():
+    driver = initialize_chrome_driver()
+    url = "https://www.formula1.com/en/racing/2024"
+    driver.get(url)
+    time.sleep(5)
+    html = driver.page_source
+    soup = bs(html, 'html.parser')
+    content_divs = soup.find_all('div', attrs={'class': 'f1-container'})
+    return content_divs    
 
-    next_race_sessions_df = process_datetime_columns(next_race_sessions)
-    return next_race_sessions_df
+def get_specific_div_content():
+    content_div = get_next_race_content()
+    country_event = get_events_remaining().iloc[0].Country
+    for div in content_div:
+        if div.find('fieldset') and country_event in div.text:
+            event_content = div
+            break
+    return event_content
 
-def display_next_race_sessions():
-    next_race_sessions_df = get_and_process_next_race_sessions()
+def get_date_events():
+    event_content = get_specific_div_content()
+    paragraphs = event_content.find_all('p', class_='f1-text')
+    titles = event_content.find_all('p', class_='f1-heading')
+    event_dates = []
+    event_titles = []
+    for p in paragraphs:
+        if 'font-normal' in p.get('class', []) and 'uppercase' in p.get('class', []):
+            event_dates.append(p.get_text())
+    for p in titles:
+        if 'uppercase' in p.get('class', []):
+            event_titles.append(p.get_text())
+    return event_dates, event_titles
 
-    event_name = next_race_sessions_df["EventName"].iloc[0]
-    country_name = next_race_sessions_df["Country"].iloc[0]
-    sessions = []
+def create_event_dataframe():
+    dates, titles = get_date_events()
+    event_data = []
+    for i in range(len(titles)):
+        event_data.append({
+            'Event': titles[i],
+            'Day': dates[i * 2],
+            'Time': dates[i * 2 + 1]
+        })
 
-    for column in next_race_sessions_df.columns:
-        if column != "EventName":
-            if pd.api.types.is_datetime64_any_dtype(next_race_sessions_df[column]):
-                data_column = next_race_sessions_df[column]
-                day = data_column.dt.day
-                month = data_column.dt.month
-                year = data_column.dt.year
-                hour = data_column.dt.hour
-                minute = data_column.dt.minute
+    df = pd.DataFrame(event_data)
 
-                d = day.iloc[0]
-                m = month.iloc[0]
-                y = year.iloc[0]
-                h = hour.iloc[0]
-                min = minute.iloc[0]
-                formatted_time = f"{h:02}:{min:02}"
+    return df
 
-                session_name = next_race_sessions_df[column.replace('DateUtc', '')].iloc[0]
-                session_info = f"{session_name} - {d}/{m}/{y} - {formatted_time}"
-
-                sessions.append(session_info)
-    return event_name, country_name, sessions  
-
-def rotate(xy, *, angle):
-    rot_mat = np.array([[np.cos(angle), np.sin(angle)],
-                        [-np.sin(angle), np.cos(angle)]])
-    return np.matmul(xy, rot_mat)
-
-@st.cache_data(show_spinner=False)
-def plot_circuit():
-    next_race = ff1.get_events_remaining().iloc[0].EventName
-    session = ff1.get_session(2023, next_race, 'Q')
-    session.load()
-
-    lap = session.laps.pick_fastest()
-    pos = lap.get_pos_data()
-
-    circuit_info = session.get_circuit_info()
-
-    track = pos.loc[:, ('X', 'Y')].to_numpy()
-
-    track_angle = circuit_info.rotation / 180 * np.pi
-
-    rotated_track = rotate(track, angle=track_angle)
-
-    x = rotated_track[:, 0]
-    y = rotated_track[:, 1]
-    x_min, x_max = x.min(), x.max()
-    y_min, y_max = y.min(), y.max()
-    x = (x - x_min) / (x_max - x_min) * 170
-    y = (y - y_min) / (y_max - y_min) * 170
-
-    y = 170 - y
-
-    img_width, img_height = 170, 170
-    img = Image.new('RGBA', (img_width, img_height), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(img)
-
-    line_points = list(zip(x, y))
-    draw.line(line_points, fill='white', width=2)
-
-    return img
 
 @st.cache_data(show_spinner=False)
 def get_driver_standings():
@@ -141,3 +105,4 @@ def get_driver_standings():
     df["Driver"] = df['Driver'].apply(lambda x: x[:-3])
 
     return df
+
