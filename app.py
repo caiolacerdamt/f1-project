@@ -55,27 +55,16 @@ if menu == "Telemetry":
 
 if menu == "Season Info":
     st.markdown(f"""
-                <h1 style="text-align: center;">
+                <h1 style="text-align: center; margin-bottom: 50px;">
                     Season - {year}
                 </h1>
                 """, unsafe_allow_html=True)
-    next_race_info = Season.create_event_dataframe()
-    html_standing2 = next_race_info.style \
-            .set_properties(**{
-                'border': 'none',
-                'padding': '6px 12px',
-            }) \
-            .set_table_styles({
-                'table': [{
-                    'selector': 'table',
-                    'props': 'width: 100%; margin: 0 auto;'
-                }]
-            }) \
-            .hide(axis='index').to_html()
-    st.markdown(html_standing2, unsafe_allow_html=True)
+
+
     st.markdown(f"""
-                    <h3 style="text-align: center;">Drivers Standings</h3>
-                    """, unsafe_allow_html=True)
+                <h3 style="text-align: center; margin-top: 50px;">Drivers Standings</h3>
+                """, unsafe_allow_html=True)
+    
     driver_standings = Season.get_driver_standings()
     html_standing = driver_standings.style \
             .set_properties(**{
@@ -85,11 +74,57 @@ if menu == "Season Info":
             .set_table_styles({
                 'table': [{
                     'selector': 'table',
-                    'props': 'width: 100%; margin: 0 auto;'
+                    'props': 'width: 90%; margin: 0 auto;'
                 }]
             }) \
             .hide(axis='index').to_html()
-    st.markdown(html_standing, unsafe_allow_html=True)
+
+    st.markdown(f"""
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    {html_standing}
+                """, unsafe_allow_html=True)
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
+    st.markdown(f"""
+                <div style="text-align: center; margin-top: 50px;">
+                    <h3>Next Race</h3>
+                </div>
+                """, unsafe_allow_html=True)
+
+    img1, img2 = Season.get_flag_and_circuit_images()
+
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        st.image(img1, width=50)
+        st.markdown(f"""
+                    <div style="text-align: center;">
+                        <h4>Holanda</h4>
+                    </div>
+                    """, unsafe_allow_html=True)
+        next_race_info = Season.create_event_dataframe()
+        html_standing2 = next_race_info.style \
+                .set_properties(**{
+                    'border': 'none',
+                    'padding': '6px 12px',
+                }) \
+                .set_table_styles({
+                    'table': [{
+                        'selector': 'table',
+                        'props': 'width: 100%; margin: 0 auto;'
+                    }]
+                }) \
+                .hide(axis='index').to_html()
+        st.markdown(html_standing2, unsafe_allow_html=True)
+    
+    with col2:
+        st.image(img2, width=300)
+
+        st.table(Season.load_predictions())
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
 
 
      

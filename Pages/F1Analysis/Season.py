@@ -10,6 +10,8 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from fastf1 import get_events_remaining
 import time
+from io import BytesIO
+from PIL import Image
 
 @st.cache_data(show_spinner=False)
 def load_predictions():
@@ -79,6 +81,25 @@ def create_event_dataframe():
     df = pd.DataFrame(event_data)
 
     return df
+
+# def get_country_flag():
+#     country_event = get_events_remaining().iloc[0].Country
+#     img_tag = get_specific_div_content().find('img', alt=country_event)
+#     img_url = img_tag['src']
+#     response = rq.get(img_url)
+#     img = Image.open(BytesIO(response.content))
+#     return img
+
+def get_flag_and_circuit_images():
+    div_event_content = get_specific_div_content()
+    images = div_event_content.find_all('img')[:2]
+    img_list = []
+    for image in images:
+        img_url = image['src']
+        response = rq.get(img_url)
+        img = Image.open(BytesIO(response.content))
+        img_list.append(img)
+    return img_list
 
 
 @st.cache_data(show_spinner=False)
