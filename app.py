@@ -121,7 +121,21 @@ if menu == "Season Info":
     with col2:
         st.image(img2, width=300)
 
-        st.table(Season.load_predictions())
+        predictions = Season.load_predictions()
+        html_predictions = predictions.style \
+        .set_properties(**{
+            'border': 'none',
+            'padding': '6px 12px',
+        }) \
+        .set_table_styles({
+            'table': [{
+                'selector': 'table',
+                'props': 'width: 100%; margin: 0 auto;'
+            }]
+        }) \
+        .hide(axis='index').to_html()
+
+    st.markdown(html_predictions, unsafe_allow_html=True)
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 
