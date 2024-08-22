@@ -18,11 +18,10 @@ from PIL import Image
 
 @st.cache_data(show_spinner=False)
 def load_predictions():
-    #subprocess.run(['python', 'script_model.py'], check=True)
     model = tf.keras.models.load_model('model/model.keras')
     df_to_predict = pd.read_csv("data/current_df_to_predict.csv")
     df_encoder_combination = pd.read_csv("data/df_model.csv")
-    df_encoder_combination = df_encoder_combination[["FullName", "NameEncoder"]].drop_duplicates().sort_values(by="NameEncoder")
+    df_encoder_combination = df_encoder_combination[["FullName", "NameEncoder"]].drop_duplicates()
     predicition = model.predict(df_to_predict)
     df_encoder_combination["Probabilities"] = np.round(predicition * 100, 2)
     df_encoder_combination = df_encoder_combination.sort_values(by="Probabilities", ascending=False)
@@ -31,25 +30,20 @@ def load_predictions():
 
     return top5
 
-@st.cache_data(show_spinner=False)
-def initialize_chrome_driver():
+@st.cache_resource(show_spinner=False)
+def get_next_race_content():
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-    return driver
-
-@st.cache_data(show_spinner=False)
-def get_next_race_content():
-    driver = initialize_chrome_driver()
     url = "https://www.formula1.com/en/racing/2024"
     driver.get(url)
     time.sleep(5)
     html = driver.page_source
     soup = bs(html, 'html.parser')
     content_divs = soup.find_all('div', attrs={'class': 'f1-container'})
-    return content_divs    
+    return content_divs 
 
-@st.cache_data(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def get_specific_div_content():
     content_div = get_next_race_content()
     country_event = get_events_remaining().iloc[0].Country
@@ -59,7 +53,7 @@ def get_specific_div_content():
             break
     return event_content
 
-@st.cache_data(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def get_date_events():
     event_content = get_specific_div_content()
     paragraphs = event_content.find_all('p', class_='f1-text')
@@ -74,7 +68,7 @@ def get_date_events():
            event_titles.append(p.get_text())
     return event_dates, event_titles
 
-@st.cache_data(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def create_event_dataframe():
     dates, titles = get_date_events()
     event_data = []
@@ -101,7 +95,7 @@ def get_flag_and_circuit_images():
         img_list.append(img)
     return img_list
 
-@st.cache_data(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def get_driver_standings():
     url = "https://www.formula1.com/en/results/2024/drivers"
     response = rq.get(url).text
