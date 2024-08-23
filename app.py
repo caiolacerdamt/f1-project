@@ -55,14 +55,12 @@ if menu == "Telemetry":
 
 if menu == "Season Info":
     st.markdown(f"""
-                <h1 style="text-align: center; margin-bottom: 50px;">
+                <p style="font-size: 32px; font-weight: bold; text-align: center;">
                     Season - {year}
-                </h1>
                 """, unsafe_allow_html=True)
 
-
     st.markdown(f"""
-                <h3 style="text-align: center; margin-top: 50px;">Drivers Standings</h3>
+                <p style="font-size: 28px; font-weight: bold; text-align: center;">Drivers Standings
                 """, unsafe_allow_html=True)
     
     driver_standings = Season.get_driver_standings()
@@ -84,26 +82,35 @@ if menu == "Season Info":
                     {html_standing}
                 """, unsafe_allow_html=True)
 
-    st.markdown("<br><br>", unsafe_allow_html=True)
-
     st.markdown(f"""
                 <div style="text-align: center; margin-top: 50px;">
-                    <h3>Next Race</h3>
+                    <p style="font-size: 28px; font-weight: bold;">Up Next
                 </div>
                 """, unsafe_allow_html=True)
 
-    img1, img2 = Season.get_flag_and_circuit_images()
-
-    col1, col2 = st.columns([1, 1])
+    circuit_info, date_events, probabilities_table = st.columns(3)
     
-    with col1:
-        st.image(img1, width=50)
+    with circuit_info:
+        country_name, country_flag_url, circuit_url = Season.get_flag_and_circuit_images()
+
+        st.markdown(f"""
+                    <div style="display: flex; justify-content:center; align-items: center;">
+                        <p style="font-size: 28px;">{country_name}  -  <img src="{country_flag_url}" alt="Country Flag" style="width: 60px;"/>
+                    """,unsafe_allow_html=True)
+        
         st.markdown(f"""
                     <div style="text-align: center;">
-                        <h4>Holanda</h4>
-                    </div>
+                    <img src="{circuit_url}" alt="Circuit Flag" style="width: 300px;"/>
                     """, unsafe_allow_html=True)
-        next_race_info = Season.create_event_dataframe()
+    
+    with date_events:
+        next_race_info, days = Season.create_event_dataframe()
+
+        st.markdown(f"""
+                          <p style="font-size: 28px; text-align: center;"> {days[0]} {days[1]}
+                        """
+                        , unsafe_allow_html=True)
+            
         html_standing2 = next_race_info.style \
                 .set_properties(**{
                     'border': 'none',
@@ -116,12 +123,22 @@ if menu == "Season Info":
                     }]
                 }) \
                 .hide(axis='index').to_html()
-        st.markdown(html_standing2, unsafe_allow_html=True)
-    
-    with col2:
-        st.image(img2, width=300)
+        
 
+        st.markdown(f"""
+                    <div style="display: flex; justify-content: center;"> {html_standing2}
+                    """, unsafe_allow_html=True)
+        
+
+
+    with probabilities_table:
         predictions = Season.load_predictions()
+
+        st.markdown(f"""
+                          <p style="font-size: 28px; text-align: center;"> Chance to win
+                        """
+                    , unsafe_allow_html=True)
+        
         html_predictions = predictions.style \
         .set_properties(**{
             'border': 'none',
@@ -135,9 +152,11 @@ if menu == "Season Info":
         }) \
         .hide(axis='index').to_html()
 
-    st.markdown(html_predictions, unsafe_allow_html=True)
+        st.markdown(f"""
+                    <div style="display: flex; justify-content: center;"> {html_predictions}
+                    """, unsafe_allow_html=True)
 
-    st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
 
 
 

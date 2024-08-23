@@ -21,7 +21,7 @@ def load_predictions():
     model = tf.keras.models.load_model('model/model.keras')
     df_to_predict = pd.read_csv("data/current_df_to_predict.csv")
     df_encoder_combination = pd.read_csv("data/df_model.csv")
-    df_encoder_combination = df_encoder_combination[["FullName", "NameEncoder"]].drop_duplicates()
+    df_encoder_combination = df_encoder_combination[["FullName", "NameEncoder"]].drop_duplicates().sort_values(by='NameEncoder')
     predicition = model.predict(df_to_predict)
     df_encoder_combination["Probabilities"] = np.round(predicition * 100, 2)
     df_encoder_combination = df_encoder_combination.sort_values(by="Probabilities", ascending=False)
@@ -58,19 +58,27 @@ def get_date_events():
     event_content = get_specific_div_content()
     paragraphs = event_content.find_all('p', class_='f1-text')
     titles = event_content.find_all('p', class_='f1-heading')
+    days =  event_content.find_all('span', class_='whitespace-nowrap')
+    event_days = []
     event_dates = []
     event_titles = []
+
+    for span in days:
+        event_days.append(span.get_text())
+
     for p in paragraphs:
         if 'font-normal' in p.get('class', []) and 'uppercase' in p.get('class', []):
             event_dates.append(p.get_text())
+
     for p in titles:
         if 'uppercase' in p.get('class', []):
            event_titles.append(p.get_text())
-    return event_dates, event_titles
+
+    return event_days, event_dates, event_titles
 
 @st.cache_resource(show_spinner=False)
 def create_event_dataframe():
-    dates, titles = get_date_events()
+    days, dates, titles = get_date_events()
     event_data = []
     for i in range(len(titles)):
         event_data.append({
@@ -81,19 +89,19 @@ def create_event_dataframe():
 
     df = pd.DataFrame(event_data)
 
-    return df
+    return df, days
 
 @st.cache_data(show_spinner=False)
 def get_flag_and_circuit_images():
     div_event_content = get_specific_div_content()
-    images = div_event_content.find_all('img')[:2]
-    img_list = []
-    for image in images:
-        img_url = image['src']
-        response = rq.get(img_url)
-        img = Image.open(BytesIO(response.content))
-        img_list.append(img)
-    return img_list
+    country_name = get_events_remaining().iloc[0].Country
+    country_flag = div_event_content.find('img', alt=country_name)
+    country_flag_url = country_flag['src'] if country_flag else None
+
+    circuirt_img = div_event_content.find('img', alt=lambda value: value and 'circuit' in value.lower())
+    circuirt_url = circuirt_img['src'] if circuirt_img else None
+ 
+    return country_name, country_flag_url, circuirt_url
 
 @st.cache_resource(show_spinner=False)
 def get_driver_standings():
