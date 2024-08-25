@@ -23,10 +23,10 @@ def load_predictions():
     df_encoder_combination = pd.read_csv("data/df_model.csv")
     df_encoder_combination = df_encoder_combination[["FullName", "NameEncoder"]].drop_duplicates().sort_values(by='NameEncoder')
     predicition = model.predict(df_to_predict)
-    df_encoder_combination["Probabilities"] = np.round(predicition * 100, 2)
-    df_encoder_combination = df_encoder_combination.sort_values(by="Probabilities", ascending=False)
-    df_encoder_combination['Probabilities'] = df_encoder_combination['Probabilities'].astype(str)
-    top5 = df_encoder_combination[["FullName", "Probabilities"]].iloc[:5]
+    df_encoder_combination["Probabilities (%)"] = np.round(predicition * 100, 2)
+    df_encoder_combination = df_encoder_combination.sort_values(by="Probabilities (%)", ascending=False)
+    df_encoder_combination['Probabilities (%)'] = df_encoder_combination['Probabilities (%)'].astype(str)
+    top5 = df_encoder_combination[["FullName", "Probabilities (%)"]].iloc[:5]
 
     return top5
 

@@ -58,33 +58,10 @@ if menu == "Season Info":
                 <p style="font-size: 32px; font-weight: bold; text-align: center;">
                     Season - {year}
                 """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-                <p style="font-size: 28px; font-weight: bold; text-align: center;">Drivers Standings
-                """, unsafe_allow_html=True)
     
-    driver_standings = Season.get_driver_standings()
-    html_standing = driver_standings.style \
-            .set_properties(**{
-                'border': 'none',
-                'padding': '6px 12px',
-            }) \
-            .set_table_styles({
-                'table': [{
-                    'selector': 'table',
-                    'props': 'width: 90%; margin: 0 auto;'
-                }]
-            }) \
-            .hide(axis='index').to_html()
-
     st.markdown(f"""
-                <div style="display: flex; justify-content: center; align-items: center;">
-                    {html_standing}
-                """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-                <div style="text-align: center; margin-top: 50px;">
-                    <p style="font-size: 28px; font-weight: bold;">Up Next
+                <div style="text-align: center;">
+                    <p style="font-size: 28px; font-weight: bold;">Next Round
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -101,6 +78,7 @@ if menu == "Season Info":
         st.markdown(f"""
                     <div style="text-align: center;">
                     <img src="{circuit_url}" alt="Circuit Flag" style="width: 300px;"/>
+                    <figcaption> {country_name} Circuit
                     """, unsafe_allow_html=True)
     
     with date_events:
@@ -157,6 +135,29 @@ if menu == "Season Info":
                     """, unsafe_allow_html=True)
 
         st.markdown("<br><br>", unsafe_allow_html=True)
+
+    st.markdown(f"""
+                <p style="font-size: 28px; font-weight: bold; text-align: center;">Drivers Standings
+                """, unsafe_allow_html=True)
+    
+    driver_standings = Season.get_driver_standings()
+    html_standing = driver_standings.style \
+            .set_properties(**{
+                'border': 'none',
+                'padding': '6px 12px',
+            }) \
+            .set_table_styles({
+                'table': [{
+                    'selector': 'table',
+                    'props': 'width: 90%; margin: 0 auto;'
+                }]
+            }) \
+            .hide(axis='index').to_html()
+
+    st.markdown(f"""
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    {html_standing}
+                """, unsafe_allow_html=True)
 
 
 

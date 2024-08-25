@@ -184,5 +184,5 @@ def train_neural_network():
     df_to_predict = mean_features(df_to_predict)
     df_to_predict.to_csv("data/current_df_to_predict.csv", index=False)
 
-if __name__ == "__main__":
-    train_neural_network()
+#if __name__ == "__main__":
+#    train_neural_network()
