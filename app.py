@@ -12,7 +12,7 @@ year = dt.now().year
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-    h1, h2, h3, h4, h5, p, th, td {
+    h1, h2, h3, h4, h5, th, td, p {
         font-family: 'Kanit', sans-serif;
     }
     </style>
@@ -82,12 +82,11 @@ if menu == "Season Info":
                     """, unsafe_allow_html=True)
     
     with date_events:
-        next_race_info, days = Season.create_event_dataframe()
+        next_race_info = Season.get_next_race_times()
 
         st.markdown(f"""
-                          <p style="font-size: 28px; text-align: center;"> {days[0]} {days[1]}
-                        """
-                        , unsafe_allow_html=True)
+                    <p style="font-size: 28px; text-align: center;"> {next_race_info.Date.iloc[0]} to {next_race_info.Date.iloc[-1]}
+                    """, unsafe_allow_html=True)
             
         html_standing2 = next_race_info.style \
                 .set_properties(**{
@@ -105,6 +104,9 @@ if menu == "Season Info":
 
         st.markdown(f"""
                     <div style="display: flex; justify-content: center;"> {html_standing2}
+                    """, unsafe_allow_html=True)
+        st.markdown(f"""
+                        <p style="text-align: center; font-weight: 200;"> ( Track Times )
                     """, unsafe_allow_html=True)
         
 
@@ -132,6 +134,9 @@ if menu == "Season Info":
 
         st.markdown(f"""
                     <div style="display: flex; justify-content: center;"> {html_predictions}
+                    """, unsafe_allow_html=True)
+        st.markdown(f"""
+                    <p style="text-align: center; font-weight: 200;"> The values may be changed.
                     """, unsafe_allow_html=True)
 
         st.markdown("<br><br>", unsafe_allow_html=True)

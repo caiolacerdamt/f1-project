@@ -54,42 +54,30 @@ def get_specific_div_content():
     return event_content
 
 @st.cache_resource(show_spinner=False)
-def get_date_events():
-    event_content = get_specific_div_content()
-    paragraphs = event_content.find_all('p', class_='f1-text')
-    titles = event_content.find_all('p', class_='f1-heading')
-    days =  event_content.find_all('span', class_='whitespace-nowrap')
-    event_days = []
-    event_dates = []
-    event_titles = []
+def get_next_race_times():
+    next_race = get_events_remaining().iloc[0].drop(labels=["RoundNumber", "Country", "Location", "OfficialEventName", "EventDate",
+                                                            "EventName", "EventFormat", "Session1Date", "Session2Date", 
+                                                            "Session3Date", "Session4Date", "Session5Date", "F1ApiSupport"])
+        
+    sessions = []
+    dates = []
+    hours = []
 
-    for span in days:
-        event_days.append(span.get_text())
+    for i in range(1, 6):
+        session_name = next_race[f'Session{i}']
+        session_datetime = pd.to_datetime(next_race[f'Session{i}DateUtc'])
 
-    for p in paragraphs:
-        if 'font-normal' in p.get('class', []) and 'uppercase' in p.get('class', []):
-            event_dates.append(p.get_text())
+        sessions.append(session_name)
+        dates.append(session_datetime.strftime('%m-%d'))
+        hours.append(session_datetime.strftime('%H:%M'))
 
-    for p in titles:
-        if 'uppercase' in p.get('class', []):
-           event_titles.append(p.get_text())
+    df = pd.DataFrame({
+        'Session': sessions,
+        'Date': dates,
+        'Hour': hours
+    })
 
-    return event_days, event_dates, event_titles
-
-@st.cache_resource(show_spinner=False)
-def create_event_dataframe():
-    days, dates, titles = get_date_events()
-    event_data = []
-    for i in range(len(titles)):
-        event_data.append({
-            'Event': titles[i],
-            'Day': dates[i * 2],
-            'Time': dates[i * 2 + 1]
-        })
-
-    df = pd.DataFrame(event_data)
-
-    return df, days
+    return df
 
 @st.cache_data(show_spinner=False)
 def get_flag_and_circuit_images():
