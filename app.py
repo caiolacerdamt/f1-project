@@ -56,16 +56,14 @@ if menu == "Telemetry":
             st.plotly_chart(Telemetry.gear_graph(telemetry_driver1, telemetry_driver2, option_driver1, option_driver2))
 
 if menu == "Next Race Info":
-    st.markdown(f"""
-                <p style="font-size: 32px; font-weight: bold; text-align: center;">
-                    Season - {year}
-                """, unsafe_allow_html=True)
     
     st.markdown(f"""
                 <div style="text-align: center;">
-                    <p style="font-size: 28px; font-weight: bold;">Next Round
+                    <p style="font-size: 32px; font-weight: bold;">Next Round
                 </div>
                 """, unsafe_allow_html=True)
+    
+    st.markdown(f"<br><br>", unsafe_allow_html=True)
 
     circuit_info, date_events, probabilities_table = st.columns(3)
     
@@ -112,9 +110,10 @@ if menu == "Next Race Info":
             st.markdown(f"""
                         <p style="text-align: center; font-weight: 200;"> ( Track Times )
                     """, unsafe_allow_html=True)
+    st.markdown(f"<br><br>", unsafe_allow_html=True)
+    st.warning(f"""The predictions are based on available data and algorithms, and are not guaranteed to be 100% accurate. 
+               Outcomes may vary due to unforeseen factors and changes in race conditions.""")
         
-
-
     with probabilities_table:
         with st.spinner("Loading Predictions..."):
             predictions = NextRace.load_predictions()
@@ -161,6 +160,7 @@ if menu == 'Standings':
                         """, unsafe_allow_html=True)
 
             driver_standings = Standings.get_driver_standings()
+
             html_driver_standing = driver_standings.style \
             .set_properties(**{
                 'border': 'none',
@@ -177,8 +177,8 @@ if menu == 'Standings':
             st.markdown(f"""
                 <div style="display: flex; justify-content: center; align-items: center;">
                     {html_driver_standing}
-                """, unsafe_allow_html=True)
-
+                 """, unsafe_allow_html=True)
+                
         with teams:
 
             st.markdown(f"""

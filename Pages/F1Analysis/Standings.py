@@ -26,6 +26,8 @@ def get_driver_standings():
     df = pd.DataFrame(rows, columns=headers)
     df["Driver"] = df['Driver'].apply(lambda x: x[:-3])
 
+    df = df.drop(columns=["Nationality"])
+
     return df
 
 @st.cache_resource(show_spinner=False)
