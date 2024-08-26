@@ -78,7 +78,7 @@ Contributions are welcome! If you would like to contribute to the project, pleas
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE). See the `LICENSE` file for more details.
+This project is licensed under the ([LICENSE](https://github.com/caiolacerdamt/f1-project/blob/main/LICENSE.md)). See the `LICENSE` file for more details.
 
 ## Contact
 
