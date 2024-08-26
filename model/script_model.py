@@ -155,15 +155,20 @@ def train_neural_network():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
     model = Sequential()
-    model.add(Dense(124, input_dim=X_train.shape[1], kernel_regularizer=l2(0.001)))
+    model.add(Dense(248, input_dim=X_train.shape[1], kernel_regularizer=l2(0.001)))
     model.add(BatchNormalization())
     model.add(LeakyReLU(alpha=0.1))
     model.add(Dropout(0.5))
 
-    model.add(Dense(64, kernel_regularizer=l2(0.001)))
+    model.add(Dense(124, kernel_regularizer=l2(0.001)))
     model.add(BatchNormalization())
     model.add(LeakyReLU(alpha=0.1))
     model.add(Dropout(0.3))
+
+    model.add(Dense(64, kernel_regularizer=l2(0.001)))
+    model.add(BatchNormalization())
+    model.add(LeakyReLU(alpha=0.1))
+    model.add(Dropout(0.2))
 
     model.add(Dense(32, kernel_regularizer=l2(0.001)))
     model.add(BatchNormalization())
@@ -173,8 +178,9 @@ def train_neural_network():
 
     model.compile(optimizer=Adam(learning_rate=0.001), loss='binary_crossentropy', metrics=['accuracy'])
 
-    reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=5, min_lr=1e-6)
+    reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=10, min_lr=1e-6)
     early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
+    
 
     model.fit(X_train, y_train, epochs=10, batch_size=64, validation_data=(X_test, y_test), callbacks=[reduce_lr, early_stopping])
 
@@ -184,5 +190,5 @@ def train_neural_network():
     df_to_predict = mean_features(df_to_predict)
     df_to_predict.to_csv("data/current_df_to_predict.csv", index=False)
 
-#if __name__ == "__main__":
-#    train_neural_network()
+if __name__ == "__main__":
+    train_neural_network()
