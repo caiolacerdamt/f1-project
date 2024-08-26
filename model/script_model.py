@@ -168,7 +168,7 @@ def train_neural_network():
     model.add(Dense(64, kernel_regularizer=l2(0.001)))
     model.add(BatchNormalization())
     model.add(LeakyReLU(alpha=0.1))
-    model.add(Dropout(0.2))
+    model.add(Dropout(0.5))
 
     model.add(Dense(32, kernel_regularizer=l2(0.001)))
     model.add(BatchNormalization())
