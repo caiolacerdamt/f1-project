@@ -1,11 +1,12 @@
 import streamlit as st
 import Pages.F1Analysis.Telemetry as Telemetry
-import Pages.F1Analysis.Season as Season
+import Pages.F1Analysis.NextRace as NextRace
+import Pages.F1Analysis.Standings as Standings
 from datetime import datetime as dt
 
 st.set_page_config(layout="wide")
 
-menu = st.sidebar.selectbox("Menu", ("Telemetry", "Season Info"))
+menu = st.sidebar.selectbox("Menu", ("Telemetry", "Next Race Info", "Standings"))
 
 year = dt.now().year
 
@@ -26,8 +27,9 @@ if menu == "Telemetry":
     option_driver2 = None
     option_laps = None
 
-    circuits = Telemetry.get_circuits()
-    option_circuit = st.selectbox("Circuit", circuits, index=None, placeholder="Choose a circuit")
+    with st.spinner("Loading Circuits"):
+        circuits = Telemetry.get_circuits()
+        option_circuit = st.selectbox("Circuit", circuits, index=None, placeholder="Choose a circuit")
 
     if option_circuit is not None:
         try:
@@ -53,7 +55,7 @@ if menu == "Telemetry":
             st.plotly_chart(Telemetry.throttle_graph(telemetry_driver1, telemetry_driver2, option_driver1, option_driver2))
             st.plotly_chart(Telemetry.gear_graph(telemetry_driver1, telemetry_driver2, option_driver1, option_driver2))
 
-if menu == "Season Info":
+if menu == "Next Race Info":
     st.markdown(f"""
                 <p style="font-size: 32px; font-weight: bold; text-align: center;">
                     Season - {year}
@@ -68,27 +70,29 @@ if menu == "Season Info":
     circuit_info, date_events, probabilities_table = st.columns(3)
     
     with circuit_info:
-        country_name, country_flag_url, circuit_url = Season.get_flag_and_circuit_images()
+        with st.spinner("Loading Next Circuit Info..."):
+            country_name, country_flag_url, circuit_url = NextRace.get_flag_and_circuit_images()
 
-        st.markdown(f"""
+            st.markdown(f"""
                     <div style="display: flex; justify-content:center; align-items: center;">
                         <p style="font-size: 28px;">{country_name}  -  <img src="{country_flag_url}" alt="Country Flag" style="width: 60px;"/>
                     """,unsafe_allow_html=True)
         
-        st.markdown(f"""
+            st.markdown(f"""
                     <div style="text-align: center;">
                     <img src="{circuit_url}" alt="Circuit Flag" style="width: 300px;"/>
                     <figcaption> {country_name} Circuit
                     """, unsafe_allow_html=True)
     
     with date_events:
-        next_race_info = Season.get_next_race_times()
+        with st.spinner("Loading Dates..."):
+            next_race_info = NextRace.get_next_race_times()
 
-        st.markdown(f"""
+            st.markdown(f"""
                     <p style="font-size: 28px; text-align: center;"> {next_race_info.Date.iloc[0]} to {next_race_info.Date.iloc[-1]}
                     """, unsafe_allow_html=True)
             
-        html_standing2 = next_race_info.style \
+            html_standing2 = next_race_info.style \
                 .set_properties(**{
                     'border': 'none',
                     'padding': '6px 12px',
@@ -102,51 +106,62 @@ if menu == "Season Info":
                 .hide(axis='index').to_html()
         
 
-        st.markdown(f"""
+            st.markdown(f"""
                     <div style="display: flex; justify-content: center;"> {html_standing2}
                     """, unsafe_allow_html=True)
-        st.markdown(f"""
+            st.markdown(f"""
                         <p style="text-align: center; font-weight: 200;"> ( Track Times )
                     """, unsafe_allow_html=True)
         
 
 
     with probabilities_table:
-        predictions = Season.load_predictions()
+        with st.spinner("Loading Predictions..."):
+            predictions = NextRace.load_predictions()
 
-        st.markdown(f"""
+            st.markdown(f"""
                           <p style="font-size: 28px; text-align: center;"> Chance to win
                         """
                     , unsafe_allow_html=True)
         
-        html_predictions = predictions.style \
-        .set_properties(**{
-            'border': 'none',
-            'padding': '6px 12px',
-        }) \
-        .set_table_styles({
-            'table': [{
-                'selector': 'table',
-                'props': 'width: 100%; margin: 0 auto;'
-            }]
-        }) \
+            html_predictions = predictions.style \
+                .set_properties(**{
+                    'border': 'none',
+                    'padding': '6px 12px',
+                }) \
+                .set_table_styles({
+                    'table': [{
+                        'selector': 'table',
+                        'props': 'width: 100%; margin: 0 auto;'
+                }]
+            }) \
         .hide(axis='index').to_html()
 
-        st.markdown(f"""
+            st.markdown(f"""
                     <div style="display: flex; justify-content: center;"> {html_predictions}
                     """, unsafe_allow_html=True)
-        st.markdown(f"""
+            st.markdown(f"""
                     <p style="text-align: center; font-weight: 200;"> The values may be changed.
                     """, unsafe_allow_html=True)
 
-        st.markdown("<br><br>", unsafe_allow_html=True)
+if menu == 'Standings':
 
     st.markdown(f"""
-                <p style="font-size: 28px; font-weight: bold; text-align: center;">Drivers Standings
+                <p style="font-size: 32px; font-weight: bold; text-align: center;">
+                    Standings so far
                 """, unsafe_allow_html=True)
-    
-    driver_standings = Season.get_driver_standings()
-    html_standing = driver_standings.style \
+
+    with st.spinner("Loading Driver Standings..."):
+        drivers, teams = st.columns(2)
+        
+        with drivers:
+
+            st.markdown(f"""
+                        <p style="text-align: center; font-size: 28px;"> Drivers Standings
+                        """, unsafe_allow_html=True)
+
+            driver_standings = Standings.get_driver_standings()
+            html_driver_standing = driver_standings.style \
             .set_properties(**{
                 'border': 'none',
                 'padding': '6px 12px',
@@ -159,9 +174,34 @@ if menu == "Season Info":
             }) \
             .hide(axis='index').to_html()
 
-    st.markdown(f"""
+            st.markdown(f"""
                 <div style="display: flex; justify-content: center; align-items: center;">
-                    {html_standing}
+                    {html_driver_standing}
+                """, unsafe_allow_html=True)
+
+        with teams:
+
+            st.markdown(f"""
+                        <p style="text-align: center; font-size: 28px;"> Constructors Standings
+                        """, unsafe_allow_html=True)
+
+            constructor_standings = Standings.get_contructor_standings()
+            html_constructor_standing = constructor_standings.style \
+                .set_properties(**{
+                    'border': 'none',
+                    'padding': '6px 12px',
+                }) \
+                .set_table_styles({
+                    'table': [{
+                        'selector': 'table',
+                        'props': 'width: 90%; margin: 0 auto;'
+                    }]
+                }) \
+                .hide(axis='index').to_html()
+        
+            st.markdown(f"""
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    {html_constructor_standing}
                 """, unsafe_allow_html=True)
 
 

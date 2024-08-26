@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime as dt
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def get_circuits(): 
         events_schedule = ff1.get_event_schedule(dt.now().year)
         today = pd.Timestamp.now()

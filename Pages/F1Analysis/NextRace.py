@@ -2,19 +2,15 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import tensorflow as tf
-import requests as rq
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 from fastf1 import get_events_remaining
-import time
-from io import BytesIO
-from PIL import Image
 
 @st.cache_data(show_spinner=False)
 def load_predictions():
@@ -37,7 +33,9 @@ def get_next_race_content():
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     url = "https://www.formula1.com/en/racing/2024"
     driver.get(url)
-    time.sleep(5)
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, 'f1-container'))
+    )
     html = driver.page_source
     soup = bs(html, 'html.parser')
     content_divs = soup.find_all('div', attrs={'class': 'f1-container'})
@@ -90,29 +88,4 @@ def get_flag_and_circuit_images():
     circuirt_url = circuirt_img['src'] if circuirt_img else None
  
     return country_name, country_flag_url, circuirt_url
-
-@st.cache_resource(show_spinner=False)
-def get_driver_standings():
-    url = "https://www.formula1.com/en/results/2024/drivers"
-    response = rq.get(url).text
-    soup = bs(response, 'html.parser')
-    table = soup.find('table', class_='f1-table-with-data')
-
-    headers = []
-    rows = []
-
-    for th in table.find_all('th'):
-        headers.append(th.text.strip())
-
-        
-    for tr in table.find_all('tr'):
-        cells = tr.find_all('td')
-        if len(cells) > 0:
-            row = [cell.text.strip() for cell in cells]
-            rows.append(row)
-
-    df = pd.DataFrame(rows, columns=headers)
-    df["Driver"] = df['Driver'].apply(lambda x: x[:-3])
-
-    return df
 
